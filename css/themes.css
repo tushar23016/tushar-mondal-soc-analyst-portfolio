@@ -1,0 +1,408 @@
+/* =========================================
+   TUSHAR MONDAL - SOC ANALYST PORTFOLIO
+   File: css/themes.css
+   Purpose: Dark and light theme management
+========================================= */
+
+/* ---------- 1. DARK THEME (DEFAULT) ---------- */
+
+:root,
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    /* Primary Colors */
+    --primary-color: #00ffaa;
+    --primary-hover: #00cc88;
+    --secondary-color: #00b8ff;
+    --accent-color: #8b5cf6;
+
+    /* Background Colors */
+    --bg-color: #080d17;
+    --bg-secondary: #0d1422;
+    --bg-tertiary: #111c2e;
+    --bg-card: rgba(17, 28, 46, 0.85);
+    --bg-card-hover: #17243a;
+    --bg-navbar: rgba(8, 13, 23, 0.85);
+
+    /* Text Colors */
+    --text-color: #e6edf7;
+    --text-secondary: #a0aec0;
+    --text-muted: #718096;
+    --heading-color: #ffffff;
+
+    /* Borders and Shadows */
+    --border-color: rgba(148, 163, 184, 0.15);
+    --border-hover: rgba(0, 255, 170, 0.45);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 15px 45px rgba(0, 0, 0, 0.35);
+
+    --glow-primary: 0 0 20px rgba(0, 255, 170, 0.15);
+
+    /* Status Colors */
+    --success-color: #00ffaa;
+    --warning-color: #ffb020;
+    --danger-color: #ff4d6d;
+    --info-color: #38bdf8;
+
+    /* Form Colors */
+    --input-bg: #0d1422;
+    --input-border: rgba(148, 163, 184, 0.25);
+    --input-focus: #00ffaa;
+    --placeholder-color: #718096;
+
+    /* Overlay */
+    --overlay-color: rgba(0, 0, 0, 0.65);
+}
+
+
+/* ---------- 2. LIGHT THEME ---------- */
+
+[data-theme="light"] {
+    color-scheme: light;
+
+    /* Primary Colors */
+    --primary-color: #008f68;
+    --primary-hover: #006f50;
+    --secondary-color: #0077cc;
+    --accent-color: #7c3aed;
+
+    /* Background Colors */
+    --bg-color: #f5f7fb;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #eaf0f7;
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --bg-card-hover: #f0f5fa;
+    --bg-navbar: rgba(255, 255, 255, 0.9);
+
+    /* Text Colors */
+    --text-color: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --heading-color: #0f172a;
+
+    /* Borders and Shadows */
+    --border-color: rgba(15, 23, 42, 0.12);
+    --border-hover: rgba(0, 143, 104, 0.4);
+
+    --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+    --shadow-md: 0 8px 25px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 15px 45px rgba(15, 23, 42, 0.12);
+
+    --glow-primary: 0 0 20px rgba(0, 143, 104, 0.1);
+
+    /* Status Colors */
+    --success-color: #008f68;
+    --warning-color: #b45309;
+    --danger-color: #dc2626;
+    --info-color: #0369a1;
+
+    /* Form Colors */
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --input-focus: #008f68;
+    --placeholder-color: #94a3b8;
+
+    /* Overlay */
+    --overlay-color: rgba(15, 23, 42, 0.4);
+}
+
+
+/* ---------- 3. GLOBAL THEME STYLES ---------- */
+
+html {
+    background-color: var(--bg-color);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--heading-color);
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+a {
+    color: var(--primary-color);
+}
+
+a:hover {
+    color: var(--primary-hover);
+}
+
+
+/* ---------- 4. NAVIGATION ---------- */
+
+.navbar,
+header {
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.navbar {
+    background-color: var(--bg-navbar);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-link {
+    color: var(--text-secondary);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+
+/* ---------- 5. CARDS ---------- */
+
+.card,
+.project-card,
+.skill-card,
+.investigation-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.card:hover,
+.project-card:hover,
+.skill-card:hover,
+.investigation-card:hover {
+    background-color: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
+}
+
+
+/* ---------- 6. BUTTONS ---------- */
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #06120e;
+    border: 1px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: #ffffff;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+
+/* ---------- 7. FORMS ---------- */
+
+input,
+textarea,
+select {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--input-border);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--placeholder-color);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(0, 255, 170, 0.08);
+}
+
+
+/* ---------- 8. SECTIONS ---------- */
+
+section {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.section-title {
+    color: var(--heading-color);
+}
+
+.section-subtitle {
+    color: var(--text-secondary);
+}
+
+
+/* ---------- 9. BADGES AND STATUS ---------- */
+
+.badge,
+.tag,
+.project-tag {
+    background-color: var(--bg-tertiary);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+}
+
+.status-success {
+    color: var(--success-color);
+}
+
+.status-warning {
+    color: var(--warning-color);
+}
+
+.status-danger {
+    color: var(--danger-color);
+}
+
+.status-info {
+    color: var(--info-color);
+}
+
+
+/* ---------- 10. FOOTER ---------- */
+
+footer {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+footer a {
+    color: var(--text-secondary);
+}
+
+footer a:hover {
+    color: var(--primary-color);
+}
+
+
+/* ---------- 11. THEME TOGGLE ---------- */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+
+    background-color: var(--bg-tertiary);
+    color: var(--text-color);
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--bg-card-hover);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: rotate(15deg);
+}
+
+
+/* ---------- 12. SELECTION ---------- */
+
+::selection {
+    background-color: var(--primary-color);
+    color: #06120e;
+}
+
+
+/* ---------- 13. SCROLLBAR ---------- */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--text-muted);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-color);
+}
+
+
+/* ---------- 14. LIGHT THEME SPECIFIC ADJUSTMENTS ---------- */
+
+[data-theme="light"] .btn-primary {
+    color: #ffffff;
+}
+
+[data-theme="light"] .btn-primary:hover {
+    color: #ffffff;
+}
+
+[data-theme="light"] .hero-section {
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(0, 143, 104, 0.08),
+            transparent 40%
+        ),
+        var(--bg-color);
+}
+
+[data-theme="light"] .project-card img,
+[data-theme="light"] .investigation-card img {
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+/* ---------- 15. REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    body,
+    .card,
+    .project-card,
+    .skill-card,
+    .investigation-card,
+    .theme-toggle {
+        transition: none;
+    }
+}

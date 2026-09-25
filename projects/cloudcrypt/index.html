@@ -1,0 +1,711 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="CloudCrypt is a web-based encryption and decryption project by Tushar Mondal, built using Python Flask, HTML, CSS, JavaScript, and cryptography.">
+
+    <meta name="author" content="Tushar Mondal">
+
+    <title>CloudCrypt | Tushar Mondal</title>
+
+    <!-- Main Website CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/themes.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Page-specific styling -->
+    <style>
+        .project-detail {
+            padding: 140px 0 80px;
+            min-height: 100vh;
+        }
+
+        .project-container {
+            width: min(1100px, 90%);
+            margin: 0 auto;
+        }
+
+        .project-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            text-decoration: none;
+            color: var(--primary-color, #00d4ff);
+            font-weight: 600;
+        }
+
+        .project-back:hover {
+            opacity: 0.8;
+        }
+
+        .project-header {
+            margin-bottom: 40px;
+        }
+
+        .project-label {
+            display: inline-block;
+            padding: 8px 14px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 30px;
+            color: var(--primary-color, #00d4ff);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .project-header h1 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .project-header h1 span {
+            color: var(--primary-color, #00d4ff);
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            opacity: 0.85;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .project-tags span {
+            padding: 8px 14px;
+            border-radius: 6px;
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            font-size: 0.85rem;
+        }
+
+        .project-hero-image {
+            margin: 40px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .project-hero-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .project-section {
+            margin-top: 60px;
+        }
+
+        .project-section h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            margin-bottom: 20px;
+        }
+
+        .project-section h2::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color, #00d4ff);
+            margin-top: 12px;
+        }
+
+        .project-section p {
+            line-height: 1.9;
+            opacity: 0.85;
+            margin-bottom: 15px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+            margin-top: 25px;
+        }
+
+        .project-info-card {
+            padding: 25px;
+            border: 1px solid rgba(128, 128, 128, 0.2);
+            border-radius: 12px;
+            background: rgba(128, 128, 128, 0.04);
+        }
+
+        .project-info-card i {
+            color: var(--primary-color, #00d4ff);
+            width: 28px;
+            height: 28px;
+            margin-bottom: 15px;
+        }
+
+        .project-info-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        .project-info-card p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        .workflow-list {
+            display: grid;
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .workflow-step {
+            display: flex;
+            gap: 20px;
+            padding: 22px;
+            border: 1px solid rgba(128, 128, 128, 0.2);
+            border-radius: 12px;
+            background: rgba(128, 128, 128, 0.04);
+        }
+
+        .workflow-number {
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.12);
+            color: var(--primary-color, #00d4ff);
+            font-weight: 700;
+        }
+
+        .workflow-step h3 {
+            margin-bottom: 8px;
+        }
+
+        .workflow-step p {
+            margin-bottom: 0;
+        }
+
+        .project-note {
+            padding: 22px;
+            margin-top: 25px;
+            border-left: 4px solid var(--primary-color, #00d4ff);
+            background: rgba(0, 212, 255, 0.06);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .project-note p {
+            margin: 0;
+        }
+
+        .project-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .project-actions a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .project-actions a:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background: var(--primary-color, #00d4ff);
+            color: #061018;
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(128, 128, 128, 0.35);
+            color: inherit;
+        }
+
+        .project-footer {
+            margin-top: 80px;
+            padding: 25px 0;
+            border-top: 1px solid rgba(128, 128, 128, 0.2);
+            text-align: center;
+            opacity: 0.75;
+        }
+
+        @media (max-width: 768px) {
+            .project-detail {
+                padding-top: 110px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-step {
+                gap: 14px;
+                padding: 18px;
+            }
+
+            .project-actions {
+                flex-direction: column;
+            }
+
+            .project-actions a {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="project-detail">
+        <div class="project-container">
+
+            <!-- Back Navigation -->
+            <a href="../../projects.html" class="project-back">
+                <i data-lucide="arrow-left"></i>
+                Back to Projects
+            </a>
+
+            <!-- Project Header -->
+            <header class="project-header">
+
+                <span class="project-label">
+                    WEB DEVELOPMENT PROJECT
+                </span>
+
+                <h1>
+                    Cloud<span>Crypt</span>
+                </h1>
+
+                <p class="project-description">
+                    CloudCrypt is a web-based encryption and decryption
+                    platform developed to demonstrate cryptographic
+                    operations through a simple and interactive interface.
+                    The application combines Python Flask, modern web
+                    technologies, and cryptographic libraries to provide
+                    text encryption and decryption functionality.
+                </p>
+
+                <div class="project-tags">
+                    <span>Python</span>
+                    <span>Flask</span>
+                    <span>Cryptography</span>
+                    <span>AES / Fernet</span>
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                </div>
+
+            </header>
+
+            <!-- Project Image -->
+            <div class="project-hero-image">
+                <img
+                    src="../../assets/images/projects/cloudcrypt.png"
+                    alt="CloudCrypt encryption and decryption application interface"
+                    onerror="this.parentElement.style.display='none';"
+                >
+            </div>
+
+            <!-- Overview -->
+            <section class="project-section">
+
+                <h2>Project Overview</h2>
+
+                <p>
+                    CloudCrypt is a web application designed to make
+                    basic cryptographic operations accessible through
+                    a browser-based interface.
+                </p>
+
+                <p>
+                    The platform demonstrates text transformation
+                    using a Caesar cipher, Base64 encoding and decoding,
+                    and Fernet-based symmetric encryption and decryption.
+                </p>
+
+                <p>
+                    The frontend provides an interactive interface
+                    for entering text and viewing results, while
+                    the Flask backend handles the application logic
+                    and cryptographic operations.
+                </p>
+
+            </section>
+
+            <!-- Objectives -->
+            <section class="project-section">
+
+                <h2>Project Objectives</h2>
+
+                <div class="project-grid">
+
+                    <div class="project-info-card">
+                        <i data-lucide="lock"></i>
+                        <h3>Text Encryption</h3>
+                        <p>
+                            Demonstrate encryption of text using
+                            cryptographic functionality provided
+                            by the application.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="unlock"></i>
+                        <h3>Text Decryption</h3>
+                        <p>
+                            Allow users to decrypt compatible
+                            encrypted content using the required
+                            key or input.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="refresh-cw"></i>
+                        <h3>Encoding and Decoding</h3>
+                        <p>
+                            Demonstrate Base64 encoding and decoding
+                            and Caesar cipher transformations.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="layout-dashboard"></i>
+                        <h3>User Interface</h3>
+                        <p>
+                            Provide an interactive web interface
+                            with a modern design and convenient
+                            input and output areas.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Features -->
+            <section class="project-section">
+
+                <h2>Key Features</h2>
+
+                <div class="project-grid">
+
+                    <div class="project-info-card">
+                        <i data-lucide="shield-check"></i>
+                        <h3>Fernet Encryption</h3>
+                        <p>
+                            Uses the Fernet implementation from
+                            the Python cryptography library for
+                            authenticated symmetric encryption.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="binary"></i>
+                        <h3>Base64 Encoding</h3>
+                        <p>
+                            Supports encoding and decoding data
+                            using the Base64 representation.
+                            Base64 is an encoding method, not encryption.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="repeat"></i>
+                        <h3>Caesar Cipher</h3>
+                        <p>
+                            Demonstrates a classical substitution
+                            cipher for learning basic encryption
+                            concepts.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="palette"></i>
+                        <h3>Modern Interface</h3>
+                        <p>
+                            Features a responsive web interface
+                            with a glassmorphism-inspired design
+                            and dark and light themes.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Technology Stack -->
+            <section class="project-section">
+
+                <h2>Technology Stack</h2>
+
+                <div class="project-grid">
+
+                    <div class="project-info-card">
+                        <i data-lucide="code"></i>
+                        <h3>Python</h3>
+                        <p>
+                            Implements backend functionality
+                            and handles cryptographic operations.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="server"></i>
+                        <h3>Flask</h3>
+                        <p>
+                            Handles HTTP requests and connects
+                            the frontend with the backend logic.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="shield"></i>
+                        <h3>Cryptography Library</h3>
+                        <p>
+                            Provides Fernet encryption and
+                            decryption functionality in Python.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="monitor"></i>
+                        <h3>HTML, CSS and JavaScript</h3>
+                        <p>
+                            Build the frontend interface,
+                            styling, theme controls, and
+                            interactive user experience.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Workflow -->
+            <section class="project-section">
+
+                <h2>Application Workflow</h2>
+
+                <p>
+                    The application follows a straightforward
+                    interaction between the user interface
+                    and the Flask backend.
+                </p>
+
+                <div class="workflow-list">
+
+                    <div class="workflow-step">
+                        <div class="workflow-number">01</div>
+                        <div>
+                            <h3>Input Text</h3>
+                            <p>
+                                The user enters the text to be
+                                processed and selects the
+                                required cryptographic operation.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-number">02</div>
+                        <div>
+                            <h3>Select Operation</h3>
+                            <p>
+                                The user selects an available
+                                operation, such as encryption,
+                                decryption, encoding, or decoding.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-number">03</div>
+                        <div>
+                            <h3>Backend Processing</h3>
+                            <p>
+                                The Flask application receives
+                                the request and processes the
+                                input using the selected
+                                cryptographic or encoding method.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-number">04</div>
+                        <div>
+                            <h3>Return Result</h3>
+                            <p>
+                                The processed result is returned
+                                to the frontend and displayed
+                                to the user.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Learning Outcomes -->
+            <section class="project-section">
+
+                <h2>Skills Practiced</h2>
+
+                <div class="project-grid">
+
+                    <div class="project-info-card">
+                        <i data-lucide="code-2"></i>
+                        <h3>Backend Development</h3>
+                        <p>
+                            Building Flask routes and connecting
+                            backend operations with a web interface.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="key-round"></i>
+                        <h3>Cryptography Fundamentals</h3>
+                        <p>
+                            Understanding symmetric encryption,
+                            encryption keys, encoding, and
+                            decryption concepts.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="palette"></i>
+                        <h3>Frontend Development</h3>
+                        <p>
+                            Designing responsive web interfaces
+                            using HTML, CSS, and JavaScript.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="cloud"></i>
+                        <h3>Deployment</h3>
+                        <p>
+                            Deploying a Flask-based web application
+                            using a cloud hosting platform.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Security Note -->
+            <div class="project-note">
+                <p>
+                    <strong>Security note:</strong>
+                    CloudCrypt is an educational project demonstrating
+                    cryptographic concepts. The Caesar cipher and
+                    Base64 are not suitable for protecting sensitive
+                    information. Fernet encryption requires secure
+                    key management. Do not use the application to
+                    protect sensitive data unless its deployment,
+                    key handling, and security controls have been
+                    independently reviewed.
+                </p>
+            </div>
+
+            <!-- Project Links -->
+            <section class="project-section">
+
+                <h2>Live Application</h2>
+
+                <p>
+                    Explore the deployed CloudCrypt application
+                    and try its available encryption and
+                    decryption features.
+                </p>
+
+                <div class="project-actions">
+
+                    <a
+                        href="https://cloudcrypt.onrender.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-primary"
+                    >
+                        <i data-lucide="external-link"></i>
+                        Open Live Application
+                    </a>
+
+                    <a
+                        href="../../projects.html"
+                        class="btn-secondary"
+                    >
+                        <i data-lucide="folder"></i>
+                        All Projects
+                    </a>
+
+                    <a
+                        href="../../contact.html"
+                        class="btn-secondary"
+                    >
+                        <i data-lucide="mail"></i>
+                        Contact Me
+                    </a>
+
+                </div>
+
+            </section>
+
+            <!-- Footer -->
+            <footer class="project-footer">
+                <p>
+                    &copy; <span id="currentYear"></span>
+                    Tushar Mondal. All rights reserved.
+                </p>
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+    <script src="../../js/navigation.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script src="../../js/animations.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            const yearElement = document.getElementById("currentYear");
+
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+
+</body>
+</html>

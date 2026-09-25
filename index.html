@@ -1,0 +1,1261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Tushar Mondal">
+    <meta name="description"
+        content="Tushar Mondal's cybersecurity portfolio. Explore SOC projects, SIEM labs, security investigations, and technical skills.">
+
+    <meta name="theme-color" content="#080d18">
+
+    <title>Tushar Mondal | Cybersecurity Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style id="home-investigations-layout-fix">
+        /* Homepage SOC investigations preview: scoped to this section only */
+        .investigations-preview {
+            position: relative;
+            isolation: isolate;
+            overflow: visible;
+        }
+        .investigations-preview > .container {
+            width: min(1120px, calc(100% - 40px)) !important;
+            max-width: 1120px !important;
+            margin-inline: auto !important;
+        }
+        .investigations-preview .section-heading {
+            width: 100%;
+            max-width: 760px;
+            margin: 0 0 32px;
+        }
+        .investigations-preview .investigation-list {
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            align-items: stretch !important;
+            gap: 24px !important;
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+        }
+        .investigations-preview a.investigation-card {
+            position: relative !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            justify-content: flex-start !important;
+            gap: 0 !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            min-height: 0 !important;
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            border: 1px solid var(--border-color, rgba(148, 163, 184, .22)) !important;
+            border-radius: 18px !important;
+            background: var(--card-bg, #111827) !important;
+            color: var(--text-color, #e5e7eb) !important;
+            text-decoration: none !important;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, .12) !important;
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
+        }
+        .investigations-preview .investigation-icon {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            width: 100% !important;
+            height: 150px !important;
+            min-height: 150px !important;
+            padding: 22px !important;
+            box-sizing: border-box !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            background:
+                radial-gradient(ellipse at 15% 15%, rgba(0, 230, 170, .20), transparent 58%),
+                linear-gradient(135deg, #101c2d, #172b42 58%, #0b1220) !important;
+            color: #00e6a8 !important;
+        }
+        .investigations-preview .investigation-icon svg,
+        .investigations-preview .investigation-icon i {
+            display: block;
+            width: 30px !important;
+            height: 30px !important;
+            color: #00e6a8 !important;
+            stroke: currentColor;
+        }
+        .investigations-preview .investigation-info {
+            display: flex !important;
+            flex: 1 1 auto !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+            min-width: 0 !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 22px !important;
+            box-sizing: border-box !important;
+            background: transparent !important;
+            color: #e5e7eb !important;
+        }
+        .investigations-preview .investigation-id {
+            display: inline-block !important;
+            margin: 0 !important;
+            color: #00d6a0 !important;
+            font-size: .78rem !important;
+            font-weight: 700 !important;
+            line-height: 1.4 !important;
+            letter-spacing: .04em !important;
+        }
+        .investigations-preview .investigation-info h3 {
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            color: var(--heading-color, #f1f5f9) !important;
+            font-size: 1.12rem !important;
+            font-weight: 750 !important;
+            line-height: 1.45 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        .investigations-preview .investigation-info p {
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            color: var(--muted-text, #a8b3c5) !important;
+            font-size: .9rem !important;
+            font-weight: 400 !important;
+            line-height: 1.7 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        .investigations-preview .investigation-arrow {
+            position: absolute !important;
+            right: 18px !important;
+            bottom: 18px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 36px !important;
+            height: 36px !important;
+            margin: 0 !important;
+            border: 1px solid rgba(0, 214, 160, .3) !important;
+            border-radius: 10px !important;
+            background: rgba(0, 214, 160, .08) !important;
+            color: #00d6a0 !important;
+        }
+        .investigations-preview a.investigation-card:hover {
+            border-color: rgba(0, 214, 160, .55) !important;
+            transform: translateY(-5px) !important;
+            box-shadow: 0 18px 42px rgba(0, 0, 0, .2) !important;
+        }
+        .investigations-preview a.investigation-card:focus-visible {
+            outline: 3px solid #00d6a0 !important;
+            outline-offset: 4px !important;
+        }
+
+        /* Readable light-theme text; independent of theme variable naming. */
+        body:not(.dark-mode):not([data-theme="dark"]) .investigations-preview a.investigation-card {
+            background: #fff !important;
+            border-color: #dbe3ee !important;
+            color: #172033 !important;
+        }
+        body:not(.dark-mode):not([data-theme="dark"]) .investigations-preview .investigation-info h3 {
+            color: #172033 !important;
+        }
+        body:not(.dark-mode):not([data-theme="dark"]) .investigations-preview .investigation-info p {
+            color: #475569 !important;
+        }
+
+        @media (max-width: 1000px) {
+            .investigations-preview .investigation-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            }
+        }
+        @media (max-width: 680px) {
+            .investigations-preview > .container {
+                width: min(100% - 32px, 560px) !important;
+            }
+            .investigations-preview .investigation-list {
+                grid-template-columns: minmax(0, 1fr) !important;
+                gap: 18px !important;
+            }
+            .investigations-preview .investigation-icon {
+                height: 120px !important;
+                min-height: 120px !important;
+            }
+            .investigations-preview .investigation-info {
+                padding: 20px !important;
+                padding-bottom: 68px !important;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .investigations-preview a.investigation-card,
+            .investigations-preview a.investigation-card:hover {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= PRELOADER ================= -->
+
+    <div class="preloader" id="preloader">
+        <div class="loader-content">
+            <div class="loader-icon">
+                <i data-lucide="shield-check"></i>
+            </div>
+
+            <p>Initializing Portfolio...</p>
+
+            <div class="loader-bar">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= BACKGROUND EFFECTS ================= -->
+
+    <div class="background-effects" aria-hidden="true">
+        <div class="grid-background"></div>
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+    </div>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <header class="header" id="header">
+
+        <nav class="navbar container">
+
+            <a href="index.html" class="logo" aria-label="Tushar Mondal Home">
+                <span class="logo-bracket">&lt;</span>
+                TM
+                <span class="logo-bracket">/&gt;</span>
+            </a>
+
+            <div class="nav-links" id="navLinks">
+
+                <a href="#home" class="nav-link active">Home</a>
+
+                <a href="about.html" class="nav-link">About</a>
+
+                <a href="skills.html" class="nav-link">Skills</a>
+
+                <a href="projects.html" class="nav-link">Projects</a>
+
+                <a href="investigations.html" class="nav-link">
+                    Investigations
+                </a>
+
+                <a href="learning.html" class="nav-link">Learning</a>
+
+                <a href="contact.html" class="nav-link">Contact</a>
+
+            </div>
+
+            <!-- Navigation Actions -->
+            <div class="nav-actions">
+
+            <!-- Theme Toggle -->
+           
+        
+            <!-- Resume Button -->
+            <a
+                href="resume/Tushar_Mondal_Resume.pdf"
+                class="btn btn-small btn-outline resume-nav"
+                target="_blank"
+                rel="noopener noreferrer">
+        
+                <i data-lucide="file-text"></i>
+                View Resume
+        
+            </a>
+
+            <!-- Mobile Menu -->
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="navLinks">
+        
+                <i data-lucide="menu"></i>
+        
+            </button>
+        
+        </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main>
+
+
+        <!-- ================= HERO SECTION ================= -->
+
+        <section class="hero section" id="home">
+
+            <div class="container hero-container">
+
+                <!-- Left Content -->
+
+                <div class="hero-content">
+
+                    <div class="availability-badge reveal">
+
+                        <span class="status-dot"></span>
+
+                        <span>
+                            Cybersecurity Portfolio
+                        </span>
+
+                    </div>
+
+                    <p class="hero-greeting reveal">
+                        Hello, I'm
+                    </p>
+
+                    <h1 class="hero-title reveal">
+
+                        Tushar
+                        <span class="gradient-text">
+                            Mondal
+                        </span>
+
+                    </h1>
+
+                    <div class="hero-role reveal">
+
+                        <span class="terminal-symbol">$</span>
+
+                        <span id="typingText">
+                            Aspiring SOC Analyst
+                        </span>
+
+                        <span class="typing-cursor">|</span>
+
+                    </div>
+
+                    <p class="hero-description reveal">
+
+                        B.Sc. IT-CTIS student passionate about cybersecurity,
+                        security operations, and threat detection.
+
+                        Building practical experience through SIEM monitoring,
+                        security investigations, and hands-on virtual labs.
+
+                    </p>
+
+                    <div class="hero-buttons reveal">
+
+                        <a href="projects.html"
+                           class="btn btn-primary">
+
+                            Explore My Projects
+
+                            <i data-lucide="arrow-up-right"></i>
+
+                        </a>
+
+                        <a href="resume/Tushar_Mondal_Resume.pdf"
+                           class="btn btn-outline"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <i data-lucide="download"></i>
+
+                            View Resume
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- Social Links -->
+
+                    <div class="hero-socials reveal">
+
+                        <span class="social-label">
+                            Connect with me
+                        </span>
+
+                        <a href="https://github.com/tushar23016"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="GitHub">
+
+                            <i data-lucide="github"></i>
+
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/tushar-mondal-8895402a7"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="LinkedIn">
+
+                            <i data-lucide="linkedin"></i>
+
+                        </a>
+
+                        <a href="mailto:tushar23016@gmail.com"
+                           aria-label="Email">
+
+                            <i data-lucide="mail"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Right Visual -->
+
+                <div class="hero-visual reveal">
+
+                    <div class="visual-glow"></div>
+
+                    <div class="terminal-window">
+
+                        <!-- Terminal Header -->
+
+                        <div class="terminal-header">
+
+                            <div class="terminal-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                            <span class="terminal-filename">
+                                tushar@cybersec: ~
+                            </span>
+
+                            <i data-lucide="terminal"></i>
+
+                        </div>
+
+
+                        <!-- Terminal Body -->
+
+                        <div class="terminal-body">
+
+                            <p class="terminal-line">
+                                <span class="terminal-green">tushar@cybersec</span>:<span class="terminal-blue">~</span>$ whoami
+                            </p>
+
+                            <p class="terminal-output">
+                                Tushar Mondal
+                            </p>
+
+                            <p class="terminal-line">
+                                <span class="terminal-green">tushar@cybersec</span>:<span class="terminal-blue">~</span>$ cat role.txt
+                            </p>
+
+                            <p class="terminal-output">
+                                Aspiring SOC Analyst
+                            </p>
+
+                            <p class="terminal-line">
+                                <span class="terminal-green">tushar@cybersec</span>:<span class="terminal-blue">~</span>$ ls skills/
+                            </p>
+
+                            <div class="terminal-output terminal-skills">
+
+                                <span>SIEM</span>
+                                <span>Linux</span>
+                                <span>Networking</span>
+                                <span>Incident-Response</span>
+                                <span>Threat-Analysis</span>
+
+                            </div>
+
+                            <p class="terminal-line">
+                                <span class="terminal-green">tushar@cybersec</span>:<span class="terminal-blue">~</span>$ system_status
+                            </p>
+
+                            <div class="terminal-status">
+
+                                <span class="status-dot"></span>
+
+                                <span>
+                                    Continuously Learning
+                                </span>
+
+                            </div>
+
+                            <p class="terminal-line terminal-last">
+                                <span class="terminal-green">tushar@cybersec</span>:<span class="terminal-blue">~</span>$ <span class="typing-cursor">_</span>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Floating Badge -->
+
+                    <div class="floating-card floating-card-one">
+
+                        <i data-lucide="shield-check"></i>
+
+                        <div>
+                            <strong>SIEM</strong>
+                            <span>Security Monitoring</span>
+                        </div>
+
+                    </div>
+
+                    <div class="floating-card floating-card-two">
+
+                        <i data-lucide="activity"></i>
+
+                        <div>
+                            <strong>Hands-on</strong>
+                            <span>Virtual SOC Lab</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Scroll Indicator -->
+
+            <a href="#about-preview"
+               class="scroll-indicator"
+               aria-label="Scroll to about section">
+
+                <span>Scroll to explore</span>
+
+                <i data-lucide="chevrons-down"></i>
+
+            </a>
+
+        </section>
+
+
+
+        <!-- ================= ABOUT PREVIEW ================= -->
+
+        <section class="about-preview section" id="about-preview">
+
+            <div class="container">
+
+                <div class="section-heading reveal">
+
+                    <span class="section-label">
+                        ABOUT ME
+                    </span>
+
+                    <h2>
+                        Learning. Building.
+                        <span class="gradient-text">
+                            Securing.
+                        </span>
+                    </h2>
+
+                    <p>
+                        My journey into cybersecurity and security operations.
+                    </p>
+
+                </div>
+
+
+                <div class="about-grid">
+
+                    <div class="about-content reveal">
+
+                        <h3>
+                            Turning technical knowledge into practical skills.
+                        </h3>
+
+                        <p>
+                            I am pursuing a B.Sc. in IT-CTIS and developing
+                            hands-on skills in security monitoring, Linux
+                            administration, networking, and incident response.
+                        </p>
+
+                        <p>
+                            Through my virtual SOC environment, I practice
+                            collecting security logs, monitoring alerts,
+                            and investigating suspicious activities using Wazuh.
+                        </p>
+
+                        <a href="about.html" class="text-link">
+
+                            More About Me
+
+                            <i data-lucide="arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- Highlight Cards -->
+
+                    <div class="about-highlights">
+
+                        <div class="highlight-card reveal">
+
+                            <div class="highlight-icon">
+                                <i data-lucide="graduation-cap"></i>
+                            </div>
+
+                            <div>
+                                <h4>Education</h4>
+                                <p>B.Sc. IT-CTIS</p>
+                            </div>
+
+                        </div>
+
+                        <div class="highlight-card reveal">
+
+                            <div class="highlight-icon">
+                                <i data-lucide="shield-check"></i>
+                            </div>
+
+                            <div>
+                                <h4>Career Focus</h4>
+                                <p>SOC Analyst / Cybersecurity</p>
+                            </div>
+
+                        </div>
+
+                        <div class="highlight-card reveal">
+
+                            <div class="highlight-icon">
+                                <i data-lucide="server"></i>
+                            </div>
+
+                            <div>
+                                <h4>Practical Experience</h4>
+                                <p>Virtual SOC Lab with Wazuh</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= SKILLS PREVIEW ================= -->
+
+        <section class="skills-preview section" id="skills-preview">
+
+            <div class="container">
+
+                <div class="section-heading reveal">
+
+                    <span class="section-label">
+                        TECHNICAL SKILLS
+                    </span>
+
+                    <h2>
+                        Tools of the
+                        <span class="gradient-text">
+                            Trade
+                        </span>
+                    </h2>
+
+                    <p>
+                        Technologies and tools I use in my cybersecurity labs
+                        and projects.
+                    </p>
+
+                </div>
+
+
+                <div class="skills-grid">
+
+                    <div class="skill-card reveal">
+                        <i data-lucide="shield-check"></i>
+                        <h3>SIEM</h3>
+                        <p>Wazuh, Splunk, Microsoft Sentinel</p>
+                    </div>
+
+                    <div class="skill-card reveal">
+                        <i data-lucide="monitor"></i>
+                        <h3>Operating Systems</h3>
+                        <p>Linux, Ubuntu Server, Windows, Kali Linux</p>
+                    </div>
+
+                    <div class="skill-card reveal">
+                        <i data-lucide="network"></i>
+                        <h3>Networking</h3>
+                        <p>TCP/IP, DNS, HTTP, Wireshark, Nmap</p>
+                    </div>
+
+                    <div class="skill-card reveal">
+                        <i data-lucide="search-code"></i>
+                        <h3>Security Analysis</h3>
+                        <p>Log Analysis, IOC Investigation, Alert Triage</p>
+                    </div>
+
+                    <div class="skill-card reveal">
+                        <i data-lucide="code"></i>
+                        <h3>Programming</h3>
+                        <p>Python, HTML, CSS, JavaScript, SQL</p>
+                    </div>
+
+                    <div class="skill-card reveal">
+                        <i data-lucide="terminal"></i>
+                        <h3>Security Tools</h3>
+                        <p>Burp Suite, VirtualBox, Git, GitHub</p>
+                    </div>
+
+                </div>
+
+
+                <div class="section-footer reveal">
+
+                    <a href="skills.html" class="btn btn-outline">
+
+                        View All Skills
+
+                        <i data-lucide="arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= FEATURED PROJECTS ================= -->
+
+        <section class="projects-preview section" id="projects-preview">
+
+            <div class="container">
+
+                <div class="section-heading reveal">
+
+                    <span class="section-label">
+                        MY WORK
+                    </span>
+
+                    <h2>
+                        Featured
+                        <span class="gradient-text">
+                            Projects
+                        </span>
+                    </h2>
+
+                    <p>
+                        Practical projects focused on cybersecurity,
+                        security monitoring, and application development.
+                    </p>
+
+                </div>
+
+
+                <div class="projects-grid">
+
+
+                    <!-- Project 1 -->
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image">
+
+                            <img
+                                src="assets/images/projects/wazuh-dashboard.png"
+                                alt="Wazuh security monitoring dashboard"
+                                loading="lazy">
+
+                            <span class="project-category">
+                                SOC / SIEM
+                            </span>
+
+                        </div>
+
+                        <div class="project-content">
+
+                            <h3>Virtual SOC Lab</h3>
+
+                            <p>
+                                A virtual security operations environment
+                                using Wazuh, Ubuntu Server, Windows, and
+                                Kali Linux for centralized log monitoring
+                                and security investigations.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>Wazuh</span>
+                                <span>Linux</span>
+                                <span>SIEM</span>
+                            </div>
+
+                            <a href="projects/virtual-soc-lab/index.html"
+                               class="text-link">
+
+                                View Project
+
+                                <i data-lucide="arrow-up-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Project 2 -->
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image">
+
+                            <img
+                                src="assets/images/projects/phishlens.png"
+                                alt="PHISHLENS phishing detection application"
+                                loading="lazy">
+
+                            <span class="project-category">
+                                AI / Cybersecurity
+                            </span>
+
+                        </div>
+
+                        <div class="project-content">
+
+                            <h3>PHISHLENS</h3>
+
+                            <p>
+                                An AI-based phishing detection application
+                                designed to analyze suspicious email content
+                                and identify potential phishing indicators.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>Flask</span>
+                                <span>Machine Learning</span>
+                            </div>
+
+                            <a href="projects/phishlens/index.html"
+                               class="text-link">
+
+                                View Project
+
+                                <i data-lucide="arrow-up-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Project 3 -->
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image">
+
+                            <img
+                                src="assets/images/projects/cloudcrypt.png"
+                                alt="CloudCrypt encryption application"
+                                loading="lazy">
+
+                            <span class="project-category">
+                                Web Development
+                            </span>
+
+                        </div>
+
+                        <div class="project-content">
+
+                            <h3>CloudCrypt</h3>
+
+                            <p>
+                                A web-based encryption and decryption
+                                platform demonstrating cryptographic
+                                techniques through a simple interface.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>Flask</span>
+                                <span>Cryptography</span>
+                            </div>
+
+                            <a href="projects/cloudcrypt/index.html"
+                               class="text-link">
+
+                                View Project
+
+                                <i data-lucide="arrow-up-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <div class="section-footer reveal">
+
+                    <a href="projects.html" class="btn btn-primary">
+
+                        Explore All Projects
+
+                        <i data-lucide="arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= INVESTIGATIONS PREVIEW ================= -->
+
+        <section class="investigations-preview section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        SECURITY OPERATIONS
+                    </span>
+
+                    <h2>
+                        SOC
+                        <span class="gradient-text">
+                            Investigations
+                        </span>
+                    </h2>
+
+                    <p>
+                        Security investigation write-ups from authorized
+                        labs and simulated scenarios.
+                    </p>
+
+                </div>
+
+
+                <div class="investigation-list">
+
+
+                    <a href="investigations.html"
+                       class="investigation-card">
+
+                        <div class="investigation-icon">
+                            <i data-lucide="shield-alert"></i>
+                        </div>
+
+                        <div class="investigation-info">
+
+                            <span class="investigation-id">
+                                CASE STUDY 01
+                            </span>
+
+                            <h3>Brute-Force Attack Investigation</h3>
+
+                            <p>
+                                Failed login analysis, event correlation,
+                                and security alert investigation.
+                            </p>
+
+                        </div>
+
+                        <i data-lucide="arrow-up-right"
+                           class="investigation-arrow"></i>
+
+                    </a>
+
+
+                    <a href="investigations.html"
+                       class="investigation-card">
+
+                        <div class="investigation-icon">
+                            <i data-lucide="terminal"></i>
+                        </div>
+
+                        <div class="investigation-info">
+
+                            <span class="investigation-id">
+                                CASE STUDY 02
+                            </span>
+
+                            <h3>Suspicious Activity Analysis</h3>
+
+                            <p>
+                                Investigating suspicious process activity
+                                and reviewing relevant security logs.
+                            </p>
+
+                        </div>
+
+                        <i data-lucide="arrow-up-right"
+                           class="investigation-arrow"></i>
+
+                    </a>
+
+
+                    <a href="investigations.html"
+                       class="investigation-card">
+
+                        <div class="investigation-icon">
+                            <i data-lucide="scan-search"></i>
+                        </div>
+
+                        <div class="investigation-info">
+
+                            <span class="investigation-id">
+                                CASE STUDY 03
+                            </span>
+
+                            <h3>IOC & Malware Analysis</h3>
+
+                            <p>
+                                Reviewing file hashes, suspicious URLs,
+                                and indicators of compromise.
+                            </p>
+
+                        </div>
+
+                        <i data-lucide="arrow-up-right"
+                           class="investigation-arrow"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= LEARNING PREVIEW ================= -->
+
+        <section class="learning-preview section">
+
+            <div class="container">
+
+                <div class="learning-box reveal">
+
+                    <div class="learning-content">
+
+                        <span class="section-label">
+                            CONTINUOUS LEARNING
+                        </span>
+
+                        <h2>
+                            Always Learning.
+                            <span class="gradient-text">
+                                Always Improving.
+                            </span>
+                        </h2>
+
+                        <p>
+                            Developing practical cybersecurity knowledge
+                            through hands-on labs, technical documentation,
+                            and continuous learning.
+                        </p>
+
+                        <a href="learning.html"
+                           class="btn btn-primary">
+
+                            Explore My Learning
+
+                            <i data-lucide="arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                    <div class="learning-icon">
+                        <i data-lucide="book-open-check"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CONTACT CTA ================= -->
+
+        <section class="contact-preview section">
+
+            <div class="container">
+
+                <div class="contact-box reveal">
+
+                    <span class="section-label">
+                        GET IN TOUCH
+                    </span>
+
+                    <h2>
+                        Let's Connect
+                    </h2>
+
+                    <p>
+                        Interested in cybersecurity, security operations,
+                        or professional opportunities? Feel free to connect.
+                    </p>
+
+                    <a href="contact.html"
+                       class="btn btn-primary">
+
+                        Contact Me
+
+                        <i data-lucide="arrow-up-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-container">
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-bracket">&lt;</span>
+                TM
+                <span class="logo-bracket">/&gt;</span>
+
+            </a>
+
+            <p class="footer-text">
+                Designed and built by Tushar Mondal.
+            </p>
+
+            <div class="footer-socials">
+
+                <a href="https://github.com/tushar23016"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="GitHub">
+
+                    <i data-lucide="github"></i>
+
+                </a>
+
+                <a href="https://www.linkedin.com/in/tushar-mondal-8895402a7"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="LinkedIn">
+
+                    <i data-lucide="linkedin"></i>
+
+                </a>
+
+                <a href="mailto:tushar23016@gmail.com"
+                   aria-label="Email">
+
+                    <i data-lucide="mail"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="container footer-bottom">
+
+            <p>
+                &copy; <span id="currentYear"></span>
+                Tushar Mondal. All rights reserved.
+            </p>
+
+            <a href="#home" class="back-to-top">
+
+                
+
+                <i data-lucide="arrow-up"></i>
+
+            </a>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/animations.js"></script>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Set current year
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+    </script>
+
+</body>
+
+</html>

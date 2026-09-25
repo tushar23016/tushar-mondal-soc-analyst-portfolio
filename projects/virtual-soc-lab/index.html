@@ -1,0 +1,662 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Virtual SOC Lab project by Tushar Mondal. A hands-on cybersecurity lab using Wazuh, Ubuntu Server, Windows, Kali Linux, and VirtualBox.">
+
+    <meta name="author" content="Tushar Mondal">
+
+    <title>Virtual SOC Lab | Tushar Mondal</title>
+
+    <!-- Main Website CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/themes.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Page-specific styling -->
+    <style>
+        .project-detail {
+            padding: 140px 0 80px;
+            min-height: 100vh;
+        }
+
+        .project-container {
+            width: min(1100px, 90%);
+            margin: 0 auto;
+        }
+
+        .project-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            text-decoration: none;
+            color: var(--primary-color, #00d4ff);
+            font-weight: 600;
+        }
+
+        .project-back:hover {
+            opacity: 0.8;
+        }
+
+        .project-header {
+            margin-bottom: 40px;
+        }
+
+        .project-label {
+            display: inline-block;
+            padding: 8px 14px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 30px;
+            color: var(--primary-color, #00d4ff);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .project-header h1 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .project-header h1 span {
+            color: var(--primary-color, #00d4ff);
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            opacity: 0.85;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .project-tags span {
+            padding: 8px 14px;
+            border-radius: 6px;
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            font-size: 0.85rem;
+        }
+
+        .project-hero-image {
+            margin: 40px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .project-hero-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .project-section {
+            margin-top: 60px;
+        }
+
+        .project-section h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            margin-bottom: 20px;
+        }
+
+        .project-section h2::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color, #00d4ff);
+            margin-top: 12px;
+        }
+
+        .project-section p {
+            line-height: 1.9;
+            opacity: 0.85;
+            margin-bottom: 15px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+            margin-top: 25px;
+        }
+
+        .project-info-card {
+            padding: 25px;
+            border: 1px solid rgba(128, 128, 128, 0.2);
+            border-radius: 12px;
+            background: rgba(128, 128, 128, 0.04);
+        }
+
+        .project-info-card i {
+            color: var(--primary-color, #00d4ff);
+            width: 28px;
+            height: 28px;
+            margin-bottom: 15px;
+        }
+
+        .project-info-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        .project-info-card p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        .project-info-card ul {
+            padding-left: 20px;
+            line-height: 2;
+            opacity: 0.85;
+        }
+
+        .workflow-list {
+            display: grid;
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .workflow-step {
+            display: flex;
+            gap: 20px;
+            padding: 22px;
+            border: 1px solid rgba(128, 128, 128, 0.2);
+            border-radius: 12px;
+            background: rgba(128, 128, 128, 0.04);
+        }
+
+        .workflow-number {
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.12);
+            color: var(--primary-color, #00d4ff);
+            font-weight: 700;
+        }
+
+        .workflow-step h3 {
+            margin-bottom: 8px;
+        }
+
+        .workflow-step p {
+            margin-bottom: 0;
+        }
+
+        .project-note {
+            padding: 22px;
+            margin-top: 25px;
+            border-left: 4px solid var(--primary-color, #00d4ff);
+            background: rgba(0, 212, 255, 0.06);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .project-note p {
+            margin: 0;
+        }
+
+        .project-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .project-actions a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .project-actions a:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background: var(--primary-color, #00d4ff);
+            color: #061018;
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(128, 128, 128, 0.35);
+            color: inherit;
+        }
+
+        .project-footer {
+            margin-top: 80px;
+            padding: 25px 0;
+            border-top: 1px solid rgba(128, 128, 128, 0.2);
+            text-align: center;
+            opacity: 0.75;
+        }
+
+        @media (max-width: 768px) {
+            .project-detail {
+                padding-top: 110px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-step {
+                gap: 14px;
+                padding: 18px;
+            }
+
+            .project-actions {
+                flex-direction: column;
+            }
+
+            .project-actions a {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Project Details -->
+    <main class="project-detail">
+        <div class="project-container">
+
+            <!-- Back Navigation -->
+            <a href="../../projects.html" class="project-back">
+                <i data-lucide="arrow-left"></i>
+                Back to Projects
+            </a>
+
+            <!-- Project Header -->
+            <header class="project-header">
+
+                <span class="project-label">
+                    SOC ANALYST LAB PROJECT
+                </span>
+
+                <h1>
+                    Virtual <span>SOC Lab</span>
+                </h1>
+
+                <p class="project-description">
+                    A hands-on Security Operations Center lab built using
+                    Wazuh, Ubuntu Server, Windows, Kali Linux, and VirtualBox.
+                    The lab is designed to practice security event monitoring,
+                    log analysis, alert investigation, and basic incident
+                    response in a controlled virtual environment.
+                </p>
+
+                <div class="project-tags">
+                    <span>Wazuh SIEM</span>
+                    <span>Ubuntu Server</span>
+                    <span>Windows</span>
+                    <span>Kali Linux</span>
+                    <span>VirtualBox</span>
+                    <span>Log Analysis</span>
+                </div>
+
+            </header>
+
+            <!-- Architecture Image -->
+            <div class="project-hero-image">
+                <img
+                    src="../../assets/images/projects/soc-architecture.png"
+                    alt="Virtual SOC lab architecture"
+                    onerror="this.parentElement.style.display='none';"
+                >
+            </div>
+
+            <!-- Overview -->
+            <section class="project-section">
+
+                <h2>Project Overview</h2>
+
+                <p>
+                    The Virtual SOC Lab is a personal cybersecurity learning
+                    environment created to understand how security monitoring
+                    works in an organization.
+                </p>
+
+                <p>
+                    Wazuh is deployed on an Ubuntu Server virtual machine.
+                    A Windows machine is connected using the Wazuh agent to
+                    forward endpoint security events to the manager.
+                    Kali Linux is used as a separate security testing machine
+                    within the virtual lab.
+                </p>
+
+                <p>
+                    The purpose of this project is to understand how endpoint
+                    events are collected, how security alerts are generated,
+                    and how an analyst can investigate suspicious activity.
+                </p>
+
+            </section>
+
+            <!-- Architecture -->
+            <section class="project-section">
+
+                <h2>Lab Architecture</h2>
+
+                <p>
+                    The lab uses virtual machines running in VirtualBox.
+                    Each machine has a separate role in the monitoring
+                    environment.
+                </p>
+
+                <div class="project-grid">
+
+                    <div class="project-info-card">
+                        <i data-lucide="server"></i>
+                        <h3>Ubuntu Server</h3>
+                        <p>
+                            Hosts the Wazuh manager and central monitoring
+                            components. Receives and processes security
+                            events from connected agents.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="monitor"></i>
+                        <h3>Windows Endpoint</h3>
+                        <p>
+                            Runs the Wazuh agent and serves as the monitored
+                            endpoint. Generates system and security events
+                            for monitoring and investigation.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="shield"></i>
+                        <h3>Kali Linux</h3>
+                        <p>
+                            Used as a security testing machine for authorized
+                            activities in the isolated virtual lab.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="network"></i>
+                        <h3>VirtualBox Networking</h3>
+                        <p>
+                            Connects the virtual machines and enables
+                            communication between the Wazuh manager,
+                            monitored endpoint, and testing machine.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Tools -->
+            <section class="project-section">
+
+                <h2>Tools and Technologies</h2>
+
+                <div class="project-grid">
+
+                    <div class="project-info-card">
+                        <h3>Wazuh</h3>
+                        <p>
+                            SIEM and XDR platform used for security event
+                            collection, endpoint monitoring, alerting,
+                            and log analysis.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3>Ubuntu Server</h3>
+                        <p>
+                            Linux server environment used to deploy and
+                            manage the Wazuh monitoring infrastructure.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3>Windows</h3>
+                        <p>
+                            Endpoint operating system used to generate
+                            and monitor security-related events.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <h3>VirtualBox</h3>
+                        <p>
+                            Hypervisor used to create and manage the
+                            virtual machines and lab network.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Workflow -->
+            <section class="project-section">
+
+                <h2>Monitoring and Investigation Workflow</h2>
+
+                <p>
+                    The lab follows a basic SOC investigation workflow
+                    to understand how an analyst handles security alerts.
+                </p>
+
+                <div class="workflow-list">
+
+                    <div class="workflow-step">
+                        <div class="workflow-number">01</div>
+                        <div>
+                            <h3>Log Collection</h3>
+                            <p>
+                                The Wazuh agent collects configured
+                                security and system events from the
+                                Windows endpoint and forwards them
+                                to the Wazuh manager.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-number">02</div>
+                        <div>
+                            <h3>Security Event Monitoring</h3>
+                            <p>
+                                Review the Wazuh dashboard to monitor
+                                incoming events, agent status, alert
+                                severity, and relevant event details.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-number">03</div>
+                        <div>
+                            <h3>Alert Triage</h3>
+                            <p>
+                                Examine an alert's timestamp, source
+                                endpoint, rule information, severity,
+                                and event description to understand
+                                what triggered the detection.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-number">04</div>
+                        <div>
+                            <h3>Investigation</h3>
+                            <p>
+                                Review related logs and available
+                                evidence to determine whether the
+                                activity appears suspicious, requires
+                                further investigation, or may be
+                                legitimate system behavior.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-number">05</div>
+                        <div>
+                            <h3>Documentation</h3>
+                            <p>
+                                Record the observed activity, relevant
+                                evidence, investigation steps, and
+                                findings in a structured incident
+                                investigation format.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Learning Outcomes -->
+            <section class="project-section">
+
+                <h2>Skills Practiced</h2>
+
+                <div class="project-grid">
+
+                    <div class="project-info-card">
+                        <i data-lucide="file-search"></i>
+                        <h3>Log Analysis</h3>
+                        <p>
+                            Understanding security logs, timestamps,
+                            event fields, and endpoint activity.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="bell"></i>
+                        <h3>Alert Triage</h3>
+                        <p>
+                            Reviewing alert severity, detection rules,
+                            and event context.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="search"></i>
+                        <h3>Incident Investigation</h3>
+                        <p>
+                            Examining available evidence and documenting
+                            investigation findings.
+                        </p>
+                    </div>
+
+                    <div class="project-info-card">
+                        <i data-lucide="terminal"></i>
+                        <h3>Linux Administration</h3>
+                        <p>
+                            Practicing Linux server operations and
+                            managing a virtual security environment.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Lab Disclaimer -->
+            <div class="project-note">
+                <p>
+                    <strong>Project scope:</strong>
+                    This is a personal virtual lab for educational
+                    and cybersecurity practice. Activities are performed
+                    in a controlled environment. Lab simulations and
+                    investigation exercises should not be interpreted
+                    as professional SOC employment or production
+                    incident response experience.
+                </p>
+            </div>
+
+            <!-- Project Links -->
+            <div class="project-actions">
+
+                <a href="../../projects.html" class="btn-primary">
+                    <i data-lucide="folder"></i>
+                    View All Projects
+                </a>
+
+                <a href="../../contact.html" class="btn-secondary">
+                    <i data-lucide="mail"></i>
+                    Contact Me
+                </a>
+
+                <a
+                    href="https://github.com/tushar23016"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-secondary"
+                >
+                    <i data-lucide="github"></i>
+                    GitHub Profile
+                </a>
+
+            </div>
+
+            <!-- Footer -->
+            <footer class="project-footer">
+                <p>
+                    &copy; <span id="currentYear"></span>
+                    Tushar Mondal. All rights reserved.
+                </p>
+            </footer>
+
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+    <script src="../../js/navigation.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script src="../../js/animations.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            const yearElement = document.getElementById("currentYear");
+
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+
+</body>
+</html>

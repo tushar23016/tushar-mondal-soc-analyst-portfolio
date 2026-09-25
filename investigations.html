@@ -1,0 +1,1890 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Investigations | Tushar Mondal</title>
+
+    <meta name="description"
+        content="Explore SOC investigation case studies by Tushar Mondal, including brute-force detection, PowerShell alert analysis, and indicators of compromise investigation.">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style id="investigations-page-fixes">
+        /* Page-scoped layout and contrast fixes */
+        .investigations-section .container,
+        .case-details-section .container,
+        .investigation-workflow .container,
+        .investigation-overview .container,
+        .investigation-notice .container,
+        .investigations-cta .container {
+            width: min(1120px, calc(100% - 40px));
+            max-width: 1120px;
+            margin-inline: auto;
+        }
+
+        .investigations-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            align-items: stretch;
+            gap: 24px;
+            width: 100%;
+            margin-top: 32px;
+        }
+
+        .investigation-card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            height: 100%;
+            overflow: hidden;
+            border: 1px solid var(--border-color, rgba(148, 163, 184, .22));
+            border-radius: 18px;
+            background: var(--card-bg, var(--surface-color, #111827));
+            color: var(--text-color, #e5e7eb);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, .10);
+        }
+
+        .investigation-image {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 210px;
+            min-height: 210px;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 15% 15%, rgba(0, 230, 170, .20), transparent 55%),
+                linear-gradient(135deg, #101c2d, #172b42 55%, #0b1220);
+        }
+
+        .investigation-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .investigation-image-overlay {
+            position: absolute;
+            inset: auto 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 14px 16px;
+            color: #fff;
+            background: linear-gradient(transparent, rgba(2, 6, 23, .88));
+        }
+
+        .case-id, .case-type {
+            font-family: "Space Mono", monospace;
+            font-size: .72rem;
+            letter-spacing: .04em;
+            font-weight: 700;
+        }
+
+        .investigation-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            gap: 16px;
+            padding: 22px;
+            color: var(--text-color, #e5e7eb);
+        }
+
+        .investigation-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .investigation-tag, .case-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            max-width: 100%;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .investigation-tag {
+            color: var(--primary-color, #00d6a0);
+        }
+
+        .case-status { color: var(--muted-text, #94a3b8); }
+
+        .investigation-content h3 {
+            margin: 0;
+            color: var(--heading-color, var(--text-color, #f1f5f9));
+            font-size: 1.18rem;
+            line-height: 1.45;
+            font-weight: 750;
+        }
+
+        .investigation-content > p {
+            margin: 0;
+            color: var(--muted-text, #a8b3c5);
+            font-size: .94rem;
+            line-height: 1.7;
+        }
+
+        .investigation-details {
+            display: grid;
+            gap: 12px;
+            margin-top: 2px;
+        }
+
+        .investigation-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .investigation-detail > i {
+            flex: 0 0 18px;
+            margin-top: 3px;
+            color: var(--primary-color, #00d6a0);
+        }
+
+        .investigation-detail > div {
+            display: grid;
+            gap: 3px;
+            min-width: 0;
+        }
+
+        .investigation-detail span {
+            color: var(--muted-text, #94a3b8);
+            font-size: .78rem;
+        }
+
+        .investigation-detail strong {
+            color: var(--heading-color, var(--text-color, #e5e7eb));
+            font-size: .86rem;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .investigation-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .investigation-tags span {
+            padding: 6px 10px;
+            border: 1px solid var(--border-color, rgba(148, 163, 184, .25));
+            border-radius: 999px;
+            color: var(--muted-text, #a8b3c5);
+            background: var(--surface-color, rgba(148, 163, 184, .08));
+            font-size: .75rem;
+        }
+
+        .investigation-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            margin-top: 4px;
+            padding: 12px 14px;
+            border: 1px solid var(--primary-color, #00d6a0);
+            border-radius: 10px;
+            color: var(--primary-color, #00d6a0);
+            font-weight: 700;
+            text-decoration: none;
+            transition: background .2s ease, color .2s ease, transform .2s ease;
+        }
+
+        .investigation-link:hover {
+            color: #06111b;
+            background: var(--primary-color, #00d6a0);
+            transform: translateY(-2px);
+        }
+
+        .case-detail-card {
+            margin: 0 0 26px;
+            padding: clamp(20px, 3vw, 32px);
+            border: 1px solid var(--border-color, rgba(148, 163, 184, .22));
+            border-radius: 18px;
+            background: var(--card-bg, var(--surface-color, #111827));
+            color: var(--text-color, #e5e7eb);
+            scroll-margin-top: 100px;
+        }
+
+        .case-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color, rgba(148, 163, 184, .2));
+        }
+
+        .case-detail-header h3 {
+            margin: 8px 0 0;
+            color: var(--heading-color, var(--text-color, #f1f5f9));
+            line-height: 1.4;
+        }
+
+        .case-detail-body {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            padding: 24px 0;
+        }
+
+        .case-detail-block { min-width: 0; }
+        .case-detail-block h4 {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 12px;
+            color: var(--heading-color, var(--text-color, #f1f5f9));
+        }
+        .case-detail-block h4 i { color: var(--primary-color, #00d6a0); }
+        .case-detail-block p, .case-detail-block li {
+            color: var(--muted-text, #a8b3c5);
+            font-size: .92rem;
+            line-height: 1.75;
+        }
+        .case-detail-block ol { padding-left: 20px; margin: 0; }
+        .case-detail-block li { padding-left: 3px; margin-bottom: 8px; }
+        .case-detail-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-color, rgba(148, 163, 184, .2));
+            color: var(--muted-text, #94a3b8);
+            font-size: .85rem;
+        }
+        .case-detail-footer span { display: inline-flex; align-items: center; gap: 8px; }
+        .case-detail-footer i { color: var(--primary-color, #00d6a0); }
+
+        /* Keep readable contrast in either theme, including if theme variables are absent. */
+        body:not(.dark-mode):not([data-theme="dark"]) .investigation-card,
+        body:not(.dark-mode):not([data-theme="dark"]) .case-detail-card {
+            color: #1e293b;
+            background: #fff;
+            border-color: #dbe3ee;
+        }
+        body:not(.dark-mode):not([data-theme="dark"]) .investigation-content h3,
+        body:not(.dark-mode):not([data-theme="dark"]) .investigation-detail strong,
+        body:not(.dark-mode):not([data-theme="dark"]) .case-detail-header h3,
+        body:not(.dark-mode):not([data-theme="dark"]) .case-detail-block h4 {
+            color: #172033;
+        }
+        body:not(.dark-mode):not([data-theme="dark"]) .investigation-content > p,
+        body:not(.dark-mode):not([data-theme="dark"]) .investigation-detail span,
+        body:not(.dark-mode):not([data-theme="dark"]) .case-detail-block p,
+        body:not(.dark-mode):not([data-theme="dark"]) .case-detail-block li,
+        body:not(.dark-mode):not([data-theme="dark"]) .case-detail-footer {
+            color: #475569;
+        }
+
+        @media (max-width: 1000px) {
+            .investigations-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .case-detail-body { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 700px) {
+            .investigations-grid { grid-template-columns: 1fr; }
+            .case-detail-body { grid-template-columns: 1fr; }
+            .investigation-image { height: 190px; min-height: 190px; }
+            .investigation-content { padding: 20px; }
+            .case-detail-header { flex-direction: column; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .investigation-link { transition: none; }
+            .investigation-link:hover { transform: none; }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =========================
+         PRELOADER
+    ========================== -->
+
+    <div class="preloader" id="preloader">
+
+        <div class="preloader-content">
+
+            <span class="loader-logo">
+                TM<span>.</span>
+            </span>
+
+            <div class="loader-bar"></div>
+
+            <p>Loading investigations...</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <header class="header" id="header">
+
+        <nav class="navbar container">
+
+            <a href="index.html" class="logo">
+                TM<span>.</span>
+            </a>
+
+            <button class="menu-toggle"
+                id="menu-toggle"
+                aria-label="Open navigation menu"
+                aria-expanded="false">
+
+                <i class="fas fa-bars"></i>
+
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+
+                <li>
+                    <a href="index.html" class="nav-link">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html" class="nav-link">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="skills.html" class="nav-link">
+                        Skills
+                    </a>
+                </li>
+
+                <li>
+                    <a href="projects.html" class="nav-link">
+                        Projects
+                    </a>
+                </li>
+
+                <li>
+                    <a href="investigations.html" class="nav-link active">
+                        Investigations
+                    </a>
+                </li>
+
+                <li>
+                    <a href="learning.html" class="nav-link">
+                        Learning
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html" class="nav-link nav-contact">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+            
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main>
+
+
+        <!-- =========================
+             PAGE HERO
+        ========================== -->
+
+        <section class="page-hero section">
+
+            <div class="container">
+
+                <div class="page-hero-content">
+
+                    <span class="section-label">
+                        <span class="status-dot"></span>
+                        SOC INVESTIGATION LAB
+                    </span>
+
+                    <h1 class="page-title">
+
+                        Investigating threats.
+                        <span class="gradient-text">
+                            Understanding incidents.
+                        </span>
+
+                    </h1>
+
+                    <p class="page-description">
+
+                        A collection of security investigation
+                        case studies based on controlled lab
+                        exercises, simulated alerts, and
+                        cybersecurity analysis.
+
+                    </p>
+
+                    <div class="breadcrumb">
+
+                        <a href="index.html">Home</a>
+
+                        <i class="fas fa-chevron-right"></i>
+
+                        <span>Investigations</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             INVESTIGATION OVERVIEW
+        ========================== -->
+
+        <section class="investigation-overview section">
+
+            <div class="container">
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+
+                        <div class="stat-info">
+
+                            <h3>03</h3>
+
+                            <p>Case Studies</p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="fas fa-magnifying-glass-chart"></i>
+                        </div>
+
+                        <div class="stat-info">
+
+                            <h3>03</h3>
+
+                            <p>Investigation Topics</p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+
+                        <div class="stat-info">
+
+                            <h3>LAB</h3>
+
+                            <p>Controlled Environment</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             INVESTIGATION NOTICE
+        ========================== -->
+
+        <section class="investigation-notice section">
+
+            <div class="container">
+
+                <div class="notice-card">
+
+                    <div class="notice-icon">
+                        <i class="fas fa-circle-info"></i>
+                    </div>
+
+                    <div class="notice-content">
+
+                        <h3>About these investigations</h3>
+
+                        <p>
+
+                            These case studies are intended
+                            for cybersecurity learning and
+                            portfolio demonstration. They
+                            represent lab exercises and
+                            simulated investigation scenarios
+                            unless a case study explicitly
+                            states otherwise.
+
+                            No confidential organizational
+                            logs or private security data
+                            are included.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             INVESTIGATION FILTERS
+        ========================== -->
+
+        <section class="investigations-section section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        CASE STUDIES
+                    </span>
+
+                    <h2 class="section-title">
+
+                        Security investigations
+                        <span class="gradient-text">
+                            & analysis.
+                        </span>
+
+                    </h2>
+
+                    <p class="section-description">
+
+                        Explore the investigation workflow,
+                        evidence sources, analysis methods,
+                        and defensive recommendations.
+
+                    </p>
+
+                </div>
+
+
+                <!-- Category Filters -->
+
+                <div class="project-filters investigation-filters">
+
+                    <button class="filter-btn active"
+                        data-investigation-filter="all">
+
+                        All Cases
+
+                    </button>
+
+                    <button class="filter-btn"
+                        data-investigation-filter="windows">
+
+                        Windows Security
+
+                    </button>
+
+                    <button class="filter-btn"
+                        data-investigation-filter="network">
+
+                        Network Security
+
+                    </button>
+
+                    <button class="filter-btn"
+                        data-investigation-filter="threat">
+
+                        Threat Intelligence
+
+                    </button>
+
+                </div>
+
+
+                <!-- =========================
+                     CASE STUDIES GRID
+                ========================== -->
+
+                <div class="investigations-grid"
+                    id="investigations-grid">
+
+
+                    <!-- CASE 01: BRUTE FORCE -->
+
+                    <article class="investigation-card"
+                        data-investigation-category="windows network">
+
+                        <div class="investigation-image">
+
+                            <img src="assets/images/investigations/brute-force.png"
+                                alt="Brute-force login detection investigation"
+                                loading="lazy" onerror="this.style.display='none'">
+
+                            <div class="investigation-image-overlay">
+
+                                <span class="case-id">
+                                    CASE-001
+                                </span>
+
+                                <span class="case-type">
+                                    AUTHENTICATION
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="investigation-content">
+
+                            <div class="investigation-meta">
+
+                                <span class="investigation-tag">
+                                    WINDOWS SECURITY
+                                </span>
+
+                                <span class="case-status status-lab">
+                                    <span class="status-dot"></span>
+                                    LAB SCENARIO
+                                </span>
+
+                            </div>
+
+
+                            <h3>
+                                Brute-Force Attack Investigation
+                            </h3>
+
+
+                            <p>
+
+                                Investigate repeated failed
+                                authentication attempts and
+                                identify patterns that may
+                                indicate password guessing
+                                or brute-force activity.
+
+                            </p>
+
+
+                            <div class="investigation-details">
+
+                                <div class="investigation-detail">
+
+                                    <i class="fas fa-database"></i>
+
+                                    <div>
+
+                                        <span>Evidence Source</span>
+
+                                        <strong>
+                                            Windows Security Logs
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="investigation-detail">
+
+                                    <i class="fas fa-toolbox"></i>
+
+                                    <div>
+
+                                        <span>Tools</span>
+
+                                        <strong>
+                                            Wazuh, Event Viewer
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="investigation-detail">
+
+                                    <i class="fas fa-crosshairs"></i>
+
+                                    <div>
+
+                                        <span>Focus</span>
+
+                                        <strong>
+                                            Failed Logons & Correlation
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="investigation-tags">
+
+                                <span>Event ID 4625</span>
+                                <span>Authentication</span>
+                                <span>SIEM</span>
+
+                            </div>
+
+
+                            <a href="investigations.html#case-001"
+                                class="investigation-link"
+                                data-case="case-001">
+
+                                View Investigation
+
+                                <i class="fas fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- CASE 02: POWERSHELL -->
+
+                    <article class="investigation-card"
+                        data-investigation-category="windows threat">
+
+                        <div class="investigation-image">
+
+                            <img src="assets/images/investigations/powershell-alert.png"
+                                alt="Suspicious PowerShell activity alert analysis"
+                                loading="lazy" onerror="this.style.display='none'">
+
+                            <div class="investigation-image-overlay">
+
+                                <span class="case-id">
+                                    CASE-002
+                                </span>
+
+                                <span class="case-type">
+                                    ENDPOINT SECURITY
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="investigation-content">
+
+                            <div class="investigation-meta">
+
+                                <span class="investigation-tag">
+                                    WINDOWS SECURITY
+                                </span>
+
+                                <span class="case-status status-lab">
+                                    <span class="status-dot"></span>
+                                    LAB SCENARIO
+                                </span>
+
+                            </div>
+
+
+                            <h3>
+                                Suspicious PowerShell Activity
+                            </h3>
+
+
+                            <p>
+
+                                Analyze a simulated endpoint
+                                alert involving suspicious
+                                PowerShell execution and
+                                determine whether the observed
+                                behavior requires escalation.
+
+                            </p>
+
+
+                            <div class="investigation-details">
+
+                                <div class="investigation-detail">
+
+                                    <i class="fas fa-database"></i>
+
+                                    <div>
+
+                                        <span>Evidence Source</span>
+
+                                        <strong>
+                                            PowerShell Event Logs
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="investigation-detail">
+
+                                    <i class="fas fa-toolbox"></i>
+
+                                    <div>
+
+                                        <span>Tools</span>
+
+                                        <strong>
+                                            Wazuh, Windows Event Viewer
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="investigation-detail">
+
+                                    <i class="fas fa-crosshairs"></i>
+
+                                    <div>
+
+                                        <span>Focus</span>
+
+                                        <strong>
+                                            Process & Command Analysis
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="investigation-tags">
+
+                                <span>PowerShell</span>
+                                <span>Event ID 4104</span>
+                                <span>Endpoint</span>
+
+                            </div>
+
+
+                            <a href="investigations.html#case-002"
+                                class="investigation-link"
+                                data-case="case-002">
+
+                                View Investigation
+
+                                <i class="fas fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- CASE 03: IOC ANALYSIS -->
+
+                    <article class="investigation-card"
+                        data-investigation-category="network threat">
+
+                        <div class="investigation-image">
+
+                            <img src="assets/images/investigations/ioc-analysis.png"
+                                alt="Indicator of compromise analysis"
+                                loading="lazy" onerror="this.style.display='none'">
+
+                            <div class="investigation-image-overlay">
+
+                                <span class="case-id">
+                                    CASE-003
+                                </span>
+
+                                <span class="case-type">
+                                    THREAT INTELLIGENCE
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="investigation-content">
+
+                            <div class="investigation-meta">
+
+                                <span class="investigation-tag">
+                                    THREAT INTELLIGENCE
+                                </span>
+
+                                <span class="case-status status-lab">
+                                    <span class="status-dot"></span>
+                                    ANALYSIS EXERCISE
+                                </span>
+
+                            </div>
+
+
+                            <h3>
+                                Indicator of Compromise Analysis
+                            </h3>
+
+
+                            <p>
+
+                                Examine sample indicators such
+                                as IP addresses, domains, URLs,
+                                and file hashes to understand
+                                how analysts evaluate and
+                                document potential threats.
+
+                            </p>
+
+
+                            <div class="investigation-details">
+
+                                <div class="investigation-detail">
+
+                                    <i class="fas fa-database"></i>
+
+                                    <div>
+
+                                        <span>Evidence Source</span>
+
+                                        <strong>
+                                            Sample IOCs & Lab Data
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="investigation-detail">
+
+                                    <i class="fas fa-toolbox"></i>
+
+                                    <div>
+
+                                        <span>Tools</span>
+
+                                        <strong>
+                                            VirusTotal, Wireshark
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="investigation-detail">
+
+                                    <i class="fas fa-crosshairs"></i>
+
+                                    <div>
+
+                                        <span>Focus</span>
+
+                                        <strong>
+                                            IOC Enrichment & Correlation
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="investigation-tags">
+
+                                <span>IP Address</span>
+                                <span>File Hash</span>
+                                <span>Threat Intelligence</span>
+
+                            </div>
+
+
+                            <a href="investigations.html#case-003"
+                                class="investigation-link"
+                                data-case="case-003">
+
+                                View Investigation
+
+                                <i class="fas fa-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+                <!-- No Results -->
+
+                <div class="no-projects"
+                    id="no-investigations"
+                    style="display: none;">
+
+                    <i class="fas fa-folder-open"></i>
+
+                    <h3>No investigations found</h3>
+
+                    <p>
+                        Select another category to see available cases.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             INVESTIGATION WORKFLOW
+        ========================== -->
+
+        <section class="investigation-workflow section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        SOC WORKFLOW
+                    </span>
+
+                    <h2 class="section-title">
+
+                        My investigation
+                        <span class="gradient-text">
+                            methodology.
+                        </span>
+
+                    </h2>
+
+                    <p class="section-description">
+
+                        A structured approach to analyzing
+                        alerts and documenting security incidents.
+
+                    </p>
+
+                </div>
+
+
+                <div class="workflow-grid">
+
+
+                    <!-- Step 1 -->
+
+                    <div class="workflow-card">
+
+                        <div class="workflow-number">
+                            01
+                        </div>
+
+                        <div class="workflow-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+
+                        <h3>
+                            Alert Detection
+                        </h3>
+
+                        <p>
+
+                            Review the alert, identify
+                            the affected host, event type,
+                            timestamp, and initial severity.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- Step 2 -->
+
+                    <div class="workflow-card">
+
+                        <div class="workflow-number">
+                            02
+                        </div>
+
+                        <div class="workflow-icon">
+                            <i class="fas fa-magnifying-glass"></i>
+                        </div>
+
+                        <h3>
+                            Evidence Collection
+                        </h3>
+
+                        <p>
+
+                            Collect relevant logs,
+                            authentication events,
+                            process details, and
+                            related security records.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- Step 3 -->
+
+                    <div class="workflow-card">
+
+                        <div class="workflow-number">
+                            03
+                        </div>
+
+                        <div class="workflow-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+
+                        <h3>
+                            Analysis & Correlation
+                        </h3>
+
+                        <p>
+
+                            Correlate events, examine
+                            timelines, investigate
+                            suspicious patterns, and
+                            assess available evidence.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- Step 4 -->
+
+                    <div class="workflow-card">
+
+                        <div class="workflow-number">
+                            04
+                        </div>
+
+                        <div class="workflow-icon">
+                            <i class="fas fa-file-circle-check"></i>
+                        </div>
+
+                        <h3>
+                            Reporting & Escalation
+                        </h3>
+
+                        <p>
+
+                            Document findings, explain
+                            limitations, recommend
+                            defensive actions, and
+                            escalate when necessary.
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CASE STUDY DETAIL PANELS
+        ========================== -->
+
+        <section class="case-details-section section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        INVESTIGATION NOTES
+                    </span>
+
+                    <h2 class="section-title">
+
+                        Case study
+                        <span class="gradient-text">
+                            summaries.
+                        </span>
+
+                    </h2>
+
+                    <p class="section-description">
+
+                        Initial investigation outlines.
+                        Add your actual screenshots,
+                        logs, findings, and conclusions
+                        as you complete each lab.
+
+                    </p>
+
+                </div>
+
+
+                <!-- CASE 001 -->
+
+                <article class="case-detail-card"
+                    id="case-001">
+
+                    <div class="case-detail-header">
+
+                        <div>
+
+                            <span class="case-id">
+                                CASE-001
+                            </span>
+
+                            <h3>
+                                Brute-Force Attack Investigation
+                            </h3>
+
+                        </div>
+
+                        <span class="case-status status-lab">
+                            LAB SCENARIO
+                        </span>
+
+                    </div>
+
+
+                    <div class="case-detail-body">
+
+                        <div class="case-detail-block">
+
+                            <h4>
+                                <i class="fas fa-bullseye"></i>
+                                Objective
+                            </h4>
+
+                            <p>
+
+                                Identify repeated failed login
+                                attempts and determine whether
+                                the activity is consistent with
+                                password guessing or brute-force
+                                behavior.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="case-detail-block">
+
+                            <h4>
+                                <i class="fas fa-list-check"></i>
+                                Investigation Steps
+                            </h4>
+
+                            <ol>
+
+                                <li>
+                                    Locate failed authentication
+                                    events in Windows Security logs.
+                                </li>
+
+                                <li>
+                                    Review Event ID 4625 and
+                                    extract relevant fields.
+                                </li>
+
+                                <li>
+                                    Correlate timestamps,
+                                    source addresses, usernames,
+                                    and affected hosts.
+                                </li>
+
+                                <li>
+                                    Check for successful
+                                    logons following repeated
+                                    failures.
+                                </li>
+
+                                <li>
+                                    Document the evidence and
+                                    recommend appropriate
+                                    defensive measures.
+                                </li>
+
+                            </ol>
+
+                        </div>
+
+
+                        <div class="case-detail-block">
+
+                            <h4>
+                                <i class="fas fa-shield-halved"></i>
+                                Defensive Considerations
+                            </h4>
+
+                            <p>
+
+                                Review account lockout policies,
+                                investigate unusual source
+                                addresses, enforce multi-factor
+                                authentication where available,
+                                and monitor repeated authentication
+                                failures.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="case-detail-footer">
+
+                        <span>
+                            <i class="fas fa-database"></i>
+                            Windows Security Logs
+                        </span>
+
+                        <span>
+                            <i class="fas fa-toolbox"></i>
+                            Wazuh SIEM
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- CASE 002 -->
+
+                <article class="case-detail-card"
+                    id="case-002">
+
+                    <div class="case-detail-header">
+
+                        <div>
+
+                            <span class="case-id">
+                                CASE-002
+                            </span>
+
+                            <h3>
+                                Suspicious PowerShell Activity
+                            </h3>
+
+                        </div>
+
+                        <span class="case-status status-lab">
+                            LAB SCENARIO
+                        </span>
+
+                    </div>
+
+
+                    <div class="case-detail-body">
+
+                        <div class="case-detail-block">
+
+                            <h4>
+                                <i class="fas fa-bullseye"></i>
+                                Objective
+                            </h4>
+
+                            <p>
+
+                                Examine a simulated PowerShell
+                                security alert and determine
+                                whether the command execution
+                                is expected administrative
+                                activity or potentially suspicious.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="case-detail-block">
+
+                            <h4>
+                                <i class="fas fa-list-check"></i>
+                                Investigation Steps
+                            </h4>
+
+                            <ol>
+
+                                <li>
+                                    Identify the affected
+                                    Windows endpoint and
+                                    alert timestamp.
+                                </li>
+
+                                <li>
+                                    Review available PowerShell
+                                    logs, including Event ID 4104
+                                    when script block logging
+                                    is enabled.
+                                </li>
+
+                                <li>
+                                    Examine the process,
+                                    command-line arguments,
+                                    user account, and parent
+                                    process where available.
+                                </li>
+
+                                <li>
+                                    Correlate the activity
+                                    with surrounding endpoint
+                                    and network events.
+                                </li>
+
+                                <li>
+                                    Record findings and
+                                    determine whether
+                                    escalation is warranted.
+                                </li>
+
+                            </ol>
+
+                        </div>
+
+
+                        <div class="case-detail-block">
+
+                            <h4>
+                                <i class="fas fa-shield-halved"></i>
+                                Defensive Considerations
+                            </h4>
+
+                            <p>
+
+                                Enable appropriate PowerShell
+                                logging, restrict unnecessary
+                                administrative privileges,
+                                review endpoint protection
+                                alerts, and investigate
+                                suspicious process chains.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="case-detail-footer">
+
+                        <span>
+                            <i class="fas fa-database"></i>
+                            PowerShell Logs
+                        </span>
+
+                        <span>
+                            <i class="fas fa-toolbox"></i>
+                            Wazuh & Event Viewer
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- CASE 003 -->
+
+                <article class="case-detail-card"
+                    id="case-003">
+
+                    <div class="case-detail-header">
+
+                        <div>
+
+                            <span class="case-id">
+                                CASE-003
+                            </span>
+
+                            <h3>
+                                Indicator of Compromise Analysis
+                            </h3>
+
+                        </div>
+
+                        <span class="case-status status-lab">
+                            ANALYSIS EXERCISE
+                        </span>
+
+                    </div>
+
+
+                    <div class="case-detail-body">
+
+                        <div class="case-detail-block">
+
+                            <h4>
+                                <i class="fas fa-bullseye"></i>
+                                Objective
+                            </h4>
+
+                            <p>
+
+                                Analyze sample indicators of
+                                compromise and understand
+                                how threat intelligence can
+                                support security investigations.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="case-detail-block">
+
+                            <h4>
+                                <i class="fas fa-list-check"></i>
+                                Investigation Steps
+                            </h4>
+
+                            <ol>
+
+                                <li>
+                                    Collect sample IP addresses,
+                                    domains, URLs, or file hashes
+                                    from a controlled exercise.
+                                </li>
+
+                                <li>
+                                    Identify the indicator type
+                                    and validate its format.
+                                </li>
+
+                                <li>
+                                    Review available threat
+                                    intelligence information
+                                    from reputable sources.
+                                </li>
+
+                                <li>
+                                    Correlate indicators with
+                                    relevant lab logs or
+                                    network traffic.
+                                </li>
+
+                                <li>
+                                    Document evidence,
+                                    confidence, limitations,
+                                    and recommended actions.
+                                </li>
+
+                            </ol>
+
+                        </div>
+
+
+                        <div class="case-detail-block">
+
+                            <h4>
+                                <i class="fas fa-shield-halved"></i>
+                                Defensive Considerations
+                            </h4>
+
+                            <p>
+
+                                Validate indicators using
+                                multiple sources, consider
+                                the context and age of
+                                intelligence, and avoid
+                                blocking indicators solely
+                                on an unverified match.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="case-detail-footer">
+
+                        <span>
+                            <i class="fas fa-database"></i>
+                            Sample IOCs
+                        </span>
+
+                        <span>
+                            <i class="fas fa-toolbox"></i>
+                            VirusTotal & Wireshark
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CTA SECTION
+        ========================== -->
+
+        <section class="investigations-cta section">
+
+            <div class="container">
+
+                <div class="cta-card">
+
+                    <div class="cta-content">
+
+                        <span class="section-label">
+                            EXPLORE MORE
+                        </span>
+
+                        <h2>
+                            Interested in my SOC lab?
+                        </h2>
+
+                        <p>
+
+                            Explore the virtual SOC
+                            environment and the projects
+                            behind these investigation
+                            exercises.
+
+                        </p>
+
+                        <div class="cta-buttons">
+
+                            <a href="projects/virtual-soc-lab/index.html"
+                                class="btn btn-primary">
+
+                                <i class="fas fa-shield-halved"></i>
+                                View Virtual SOC Lab
+
+                            </a>
+
+                            <a href="contact.html"
+                                class="btn btn-secondary">
+
+                                <i class="fas fa-envelope"></i>
+                                Contact Me
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="cta-decoration">
+
+                        <i class="fas fa-magnifying-glass-chart"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <a href="index.html" class="logo">
+                        TM<span>.</span>
+                    </a>
+
+                    <p>
+                        Building practical cybersecurity
+                        skills, one investigation at a time.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-socials">
+
+                    <a href="https://github.com/tushar23016"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub">
+
+                        <i class="fab fa-github"></i>
+
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/tushar-mondal-8895402a7"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn">
+
+                        <i class="fab fa-linkedin-in"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    &copy; <span id="current-year"></span>
+                    Tushar Mondal. All rights reserved.
+                </p>
+
+                <p class="footer-credit">
+                    Designed & developed by Tushar Mondal.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         BACK TO TOP
+    ========================== -->
+
+    <button class="back-to-top"
+        id="back-to-top"
+        aria-label="Back to top">
+
+        <i class="fas fa-arrow-up"></i>
+
+    </button>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/projects.js"></script>
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const filterButtons = document.querySelectorAll("[data-investigation-filter]");
+        const cards = document.querySelectorAll(".investigations-grid .investigation-card");
+        const emptyState = document.getElementById("no-investigations");
+
+        filterButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const selected = button.getAttribute("data-investigation-filter");
+
+                filterButtons.forEach(function (item) {
+                    item.classList.toggle("active", item === button);
+                    item.setAttribute("aria-pressed", item === button ? "true" : "false");
+                });
+
+                let visibleCount = 0;
+                cards.forEach(function (card) {
+                    const categories = (card.getAttribute("data-investigation-category") || "")
+                        .toLowerCase().split(/\s+/);
+                    const show = selected === "all" || categories.includes(selected);
+                    card.hidden = !show;
+                    if (show) visibleCount++;
+                });
+
+                if (emptyState) {
+                    emptyState.style.display = visibleCount ? "none" : "block";
+                }
+            });
+        });
+
+        // Ensure the filter controls expose their initial state accessibly.
+        filterButtons.forEach(function (button) {
+            button.setAttribute("aria-pressed", button.classList.contains("active") ? "true" : "false");
+        });
+    });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+# Render Blueprint for Tushar Mondal's static portfolio
+# Keep this file in the repository root, beside index.html.
+
+services:
+  - type: web
+    name: tushar-portfolio
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
+
+    # Basic security headers for the published static site.
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
