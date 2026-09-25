@@ -1,0 +1,1231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Certifications | Tushar Mondal</title>
+
+    <meta
+        name="description"
+        content="Explore cybersecurity, SOC Analyst, networking, and IT certifications and achievements of Tushar Mondal."
+    >
+
+    <meta name="theme-color" content="#080c16">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+
+    <!-- Existing Portfolio Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Certificate Page Styles -->
+    <style>
+        /* ==============================
+           CERTIFICATE PAGE
+        ============================== */
+
+        .certificates-page {
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        .certificates-hero {
+            position: relative;
+            padding: 150px 20px 65px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .certificates-hero::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            top: -180px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(59, 130, 246, 0.13);
+            filter: blur(100px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .certificates-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .certificates-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 16px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 50px;
+            background: rgba(59, 130, 246, 0.08);
+            color: #60a5fa;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .certificates-label i {
+            width: 17px;
+            height: 17px;
+        }
+
+        .certificates-hero h1 {
+            margin: 0 0 20px;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -2px;
+        }
+
+        .certificates-hero h1 span {
+            color: #60a5fa;
+        }
+
+        .certificates-hero p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: var(--text-secondary, #94a3b8);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* ==============================
+           STATS
+        ============================== */
+
+        .certificate-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 35px auto 0;
+        }
+
+        .certificate-stat {
+            min-width: 150px;
+            padding: 18px 25px;
+            border: 1px solid var(--border-color, rgba(148, 163, 184, 0.15));
+            border-radius: 16px;
+            background: var(--card-bg, rgba(15, 23, 42, 0.55));
+            backdrop-filter: blur(15px);
+        }
+
+        .certificate-stat h3 {
+            margin: 0 0 6px;
+            color: #60a5fa;
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .certificate-stat p {
+            margin: 0;
+            font-size: 0.82rem;
+        }
+
+        /* ==============================
+           MAIN SECTION
+        ============================== */
+
+        .certificates-container {
+            width: min(1200px, 92%);
+            margin: 0 auto;
+        }
+
+        .certificates-section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .certificates-section-heading h2 {
+            margin: 0 0 10px;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 750;
+        }
+
+        .certificates-section-heading p {
+            margin: 0;
+            color: var(--text-secondary, #94a3b8);
+            line-height: 1.7;
+        }
+
+        .certificate-total {
+            padding: 8px 14px;
+            border-radius: 50px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            background: rgba(59, 130, 246, 0.08);
+            color: #60a5fa;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* ==============================
+           SEARCH AND FILTERS
+        ============================== */
+
+        .certificate-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+            padding: 20px;
+            border: 1px solid var(--border-color, rgba(148, 163, 184, 0.15));
+            border-radius: 18px;
+            background: var(--card-bg, rgba(15, 23, 42, 0.45));
+        }
+
+        .certificate-search {
+            position: relative;
+            flex: 1;
+            min-width: 220px;
+            max-width: 360px;
+        }
+
+        .certificate-search i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            color: #94a3b8;
+            pointer-events: none;
+        }
+
+        .certificate-search input {
+            width: 100%;
+            padding: 13px 15px 13px 45px;
+            border: 1px solid var(--border-color, rgba(148, 163, 184, 0.2));
+            border-radius: 12px;
+            background: var(--input-bg, rgba(15, 23, 42, 0.7));
+            color: var(--text-color, #e2e8f0);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .certificate-search input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+        }
+
+        .certificate-search input::placeholder {
+            color: #64748b;
+        }
+
+        .certificate-filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .certificate-filter {
+            padding: 11px 17px;
+            border: 1px solid var(--border-color, rgba(148, 163, 184, 0.2));
+            border-radius: 50px;
+            background: transparent;
+            color: var(--text-secondary, #94a3b8);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .certificate-filter:hover {
+            color: #60a5fa;
+            border-color: #3b82f6;
+        }
+
+        .certificate-filter.active {
+            color: #ffffff;
+            background: #2563eb;
+            border-color: #2563eb;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        /* ==============================
+           CERTIFICATE GRID
+        ============================== */
+
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .certificate-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid var(--border-color, rgba(148, 163, 184, 0.15));
+            border-radius: 20px;
+            background: var(--card-bg, rgba(15, 23, 42, 0.65));
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(59, 130, 246, 0.55);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+        }
+
+        .certificate-image-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), transparent 55%),
+                rgba(15, 23, 42, 0.85);
+            border-bottom: 1px solid var(--border-color, rgba(148, 163, 184, 0.12));
+        }
+
+        .certificate-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 12px;
+            transition: transform 0.4s ease;
+        }
+
+        .certificate-card:hover .certificate-image {
+            transform: scale(1.035);
+        }
+
+        .certificate-image-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 25px;
+            text-align: center;
+            color: #60a5fa;
+        }
+
+        .certificate-image-placeholder i {
+            width: 48px;
+            height: 48px;
+            stroke-width: 1.3;
+        }
+
+        .certificate-image-placeholder span {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .certificate-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 1;
+            padding: 7px 12px;
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            border-radius: 50px;
+            background: rgba(8, 12, 22, 0.88);
+            color: #93c5fd;
+            font-size: 0.72rem;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+        }
+
+        .certificate-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 23px;
+        }
+
+        .certificate-issuer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            color: #60a5fa;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .certificate-issuer i {
+            width: 16px;
+            height: 16px;
+        }
+
+        .certificate-content h3 {
+            margin: 0 0 12px;
+            color: var(--text-color, #e2e8f0);
+            font-size: 1.15rem;
+            line-height: 1.5;
+            font-weight: 750;
+        }
+
+        .certificate-description {
+            margin: 0 0 20px;
+            color: var(--text-secondary, #94a3b8);
+            font-size: 0.88rem;
+            line-height: 1.75;
+        }
+
+        .certificate-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-color, rgba(148, 163, 184, 0.12));
+        }
+
+        .certificate-date {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--text-secondary, #94a3b8);
+            font-size: 0.8rem;
+        }
+
+        .certificate-date i {
+            width: 15px;
+            height: 15px;
+        }
+
+        .certificate-view {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.08);
+            color: #60a5fa;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .certificate-view:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: #ffffff;
+        }
+
+        .certificate-view i {
+            width: 15px;
+            height: 15px;
+        }
+
+        /* ==============================
+           EMPTY / NO RESULTS
+        ============================== */
+
+        .certificates-empty {
+            grid-column: 1 / -1;
+            padding: 65px 25px;
+            border: 1px dashed rgba(148, 163, 184, 0.25);
+            border-radius: 20px;
+            background: var(--card-bg, rgba(15, 23, 42, 0.35));
+            text-align: center;
+        }
+
+        .certificates-empty-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 25px;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 24px;
+            background: rgba(59, 130, 246, 0.08);
+            color: #60a5fa;
+        }
+
+        .certificates-empty-icon i {
+            width: 38px;
+            height: 38px;
+        }
+
+        .certificates-empty h3 {
+            margin: 0 0 12px;
+            font-size: 1.4rem;
+            font-weight: 750;
+        }
+
+        .certificates-empty p {
+            max-width: 500px;
+            margin: 0 auto;
+            color: var(--text-secondary, #94a3b8);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .certificates-empty[hidden] {
+            display: none;
+        }
+
+        /* ==============================
+           BOTTOM CTA
+        ============================== */
+
+        .certificates-cta {
+            margin-top: 70px;
+            padding: 40px 30px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 22px;
+            background:
+                radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 50%),
+                var(--card-bg, rgba(15, 23, 42, 0.5));
+            text-align: center;
+        }
+
+        .certificates-cta h2 {
+            margin: 0 0 12px;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 750;
+        }
+
+        .certificates-cta p {
+            max-width: 600px;
+            margin: 0 auto 25px;
+            color: var(--text-secondary, #94a3b8);
+            line-height: 1.8;
+        }
+
+        .certificates-cta a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 13px 22px;
+            border-radius: 12px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .certificates-cta a:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .certificates-cta a i {
+            width: 17px;
+            height: 17px;
+        }
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 1000px) {
+            .certificates-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .certificates-hero {
+                padding: 120px 20px 50px;
+            }
+
+            .certificates-hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .certificate-controls {
+                align-items: stretch;
+            }
+
+            .certificate-search {
+                max-width: 100%;
+            }
+
+            .certificate-filters {
+                width: 100%;
+            }
+
+            .certificate-filter {
+                flex: 1;
+                padding: 10px 12px;
+            }
+
+            .certificates-section-heading {
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certificates-container {
+                width: 90%;
+            }
+
+            .certificate-stats {
+                gap: 10px;
+            }
+
+            .certificate-stat {
+                flex: 1;
+                min-width: 125px;
+                padding: 15px;
+            }
+
+            .certificate-stat h3 {
+                font-size: 1.5rem;
+            }
+
+            .certificate-controls {
+                padding: 15px;
+            }
+
+            .certificate-filters {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .certificate-cta {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==============================
+         NAVBAR
+    ============================== -->
+
+    <header class="header">
+        <nav class="navbar container">
+
+            <a href="index.html" class="logo">
+                <i data-lucide="shield-check"></i>
+                <span>Tushar<span class="logo-accent">.</span></span>
+            </a>
+
+            <div class="nav-links" id="navLinks">
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="projects.html">Projects</a>
+                <a href="certificates.html" class="active">Certificates</a>
+                <a href="investigations.html">Investigations</a>
+                <a href="learning.html">Learning</a>
+                
+                <a href="contact.html">Contact</a>
+
+            </div>
+
+            <div class="nav-actions">
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Toggle theme"
+                >
+                    <i data-lucide="sun-moon"></i>
+                </button>
+
+                <a
+                    href="resume/Tushar_Mondal_Resume.pdf"
+                    class="btn btn-primary nav-resume"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i data-lucide="download"></i>
+                    Resume
+                </a>
+
+                <button
+                    class="menu-toggle"
+                    id="menuToggle"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                >
+                    <i data-lucide="menu"></i>
+                </button>
+
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    ============================== -->
+
+    <main class="certificates-page">
+
+        <!-- HERO -->
+
+        <section class="certificates-hero">
+
+            <div class="certificates-hero-content">
+
+                <div class="certificates-label">
+                    <i data-lucide="award"></i>
+                    PROFESSIONAL DEVELOPMENT
+                </div>
+
+                <h1>
+                    Certifications &<br>
+                    <span>Achievements</span>
+                </h1>
+
+                <p>
+                    A collection of my professional certifications,
+                    cybersecurity training, technical achievements,
+                    and continuous learning in information technology
+                    and security operations.
+                </p>
+
+                <div class="certificate-stats">
+
+                    <div class="certificate-stat">
+                        <h3 id="totalCertificates">0</h3>
+                        <p>Certificates</p>
+                    </div>
+
+                    <div class="certificate-stat">
+                        <h3 id="totalProviders">0</h3>
+                        <p>Issuing Organizations</p>
+                    </div>
+
+                    <div class="certificate-stat">
+                        <h3 id="totalCategories">0</h3>
+                        <p>Categories</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CERTIFICATES -->
+
+        <section class="certificates-container">
+
+            <div class="certificates-section-heading">
+
+                <div>
+                    <h2>My Credentials</h2>
+
+                    <p>
+                        Explore my certifications and technical training.
+                    </p>
+                </div>
+
+                <div class="certificate-total">
+                    <span id="certificateCount">0</span> Certificates
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH AND FILTER -->
+
+            <div class="certificate-controls">
+
+                <div class="certificate-search">
+
+                    <i data-lucide="search"></i>
+
+                    <input
+                        type="search"
+                        id="certificateSearch"
+                        placeholder="Search certificates..."
+                        aria-label="Search certificates"
+                    >
+
+                </div>
+
+                <div
+                    class="certificate-filters"
+                    id="certificateFilters"
+                    aria-label="Filter certificates by category"
+                >
+
+                    <button
+                        type="button"
+                        class="certificate-filter active"
+                        data-filter="all"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        type="button"
+                        class="certificate-filter"
+                        data-filter="cybersecurity"
+                    >
+                        Cybersecurity
+                    </button>
+
+                    <button
+                        type="button"
+                        class="certificate-filter"
+                        data-filter="soc"
+                    >
+                        SOC & SIEM
+                    </button>
+
+                    <button
+                        type="button"
+                        class="certificate-filter"
+                        data-filter="networking"
+                    >
+                        Networking
+                    </button>
+
+                    <button
+                        type="button"
+                        class="certificate-filter"
+                        data-filter="other"
+                    >
+                        Other
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!--
+                ==========================================
+                CERTIFICATE CARDS
+
+                TO ADD A CERTIFICATE IN THE FUTURE:
+
+                1. Upload the certificate image into:
+                   assets/images/certificates/
+
+                2. Copy one certificate-card block below.
+
+                3. Change the title, issuer, date, category,
+                   image path, description and certificate URL.
+
+                4. Use one of these category values:
+                   cybersecurity
+                   soc
+                   networking
+                   other
+
+                5. For a PDF certificate, set the View Certificate
+                   link to the PDF file path.
+
+                6. Remove the empty state only if you replace
+                   this section with your own cards.
+
+                No changes to the JavaScript are required
+                when adding more certificate cards.
+                ==========================================
+            -->
+
+            <div class="certificates-grid" id="certificatesGrid">
+
+
+                
+                <article
+                    class="certificate-card"
+                    data-category="other"
+                    data-search="python data science virtual internship techno billion ai grade a plus"
+                >
+                    <div class="certificate-image-wrapper">
+                    
+                        <span class="certificate-category">
+                            Data Science
+                        </span>
+                    
+                        <img
+                            src="assets/images/certificates/python-data-science.png"
+                            alt="Python for Data Science Virtual Internship Certificate"
+                            class="certificate-image"
+                            loading="lazy"
+                        >
+                    
+                    </div>
+                
+                    <div class="certificate-content">
+                    
+                        <div class="certificate-issuer">
+                            <i data-lucide="building-2"></i>
+                            Techno Billion AI
+                        </div>
+                    
+                        <h3>Python for Data Science</h3>
+                    
+                        <p class="certificate-description">
+                            Successfully completed a virtual internship in
+                            Python for Data Science with Grade A+, demonstrating
+                            consistent learning and understanding of the concepts covered.
+                        </p>
+                    
+                        <div class="certificate-meta">
+                        
+                            <div class="certificate-date">
+                                <i data-lucide="calendar"></i>
+                                November 28, 2025
+                            </div>
+                        
+                            <a
+                                href="assets/images/certificates/python-data-science.png"
+                                class="certificate-view"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Certificate
+                                <i data-lucide="external-link"></i>
+                            </a>
+                        
+                        </div>
+                    </div>
+                </article>
+
+                
+                <!-- Cisco Introduction to Cybersecurity Certificate -->
+
+                <article
+                    class="certificate-card"
+                    data-category="cybersecurity"
+                    data-search="cisco networking academy introduction to cybersecurity cyber security"
+                >
+
+                    <div class="certificate-image-wrapper">
+
+                        <span class="certificate-category">
+                            Cybersecurity
+                        </span>
+
+                        <img
+                            src="assets/images/certificates/cisco-introduction-to-cybersecurity.jpeg"
+                            alt="Cisco Networking Academy Introduction to Cybersecurity Certificate"
+                            class="certificate-image"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                    <div class="certificate-content">
+
+                        <div class="certificate-issuer">
+                            <i data-lucide="building-2"></i>
+                            Cisco Networking Academy
+                        </div>
+
+                        <h3>Introduction to Cybersecurity</h3>
+
+                        <p class="certificate-description">
+                            Successfully completed the Cisco Networking Academy
+                            Introduction to Cybersecurity course, covering
+                            foundational cybersecurity concepts and security awareness.
+                        </p>
+
+                        <div class="certificate-meta">
+
+                            <div class="certificate-date">
+                                <i data-lucide="calendar"></i>
+                                May 4, 2026
+                            </div>
+
+                            <a
+                                href="assets/images/certificates/cisco-introduction-to-cybersecurity.jpeg"
+                                class="certificate-view"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                View Certificate
+                                <i data-lucide="external-link"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- EMPTY STATE -->
+
+            <div class="certificates-empty" id="certificatesEmpty">
+
+                <div class="certificates-empty-icon">
+                    <i data-lucide="award"></i>
+                </div>
+
+                <h3 id="emptyStateTitle">
+                    Certificates Coming Soon
+                </h3>
+
+                <p id="emptyStateMessage">
+                    I'm currently developing my skills through
+                    cybersecurity labs, hands-on projects, and
+                    professional training. My verified certificates
+                    will be displayed here as I earn them.
+                </p>
+
+            </div>
+
+
+            <!-- BOTTOM CTA -->
+
+            <div class="certificates-cta">
+
+                <h2>Skills Beyond Certificates</h2>
+
+                <p>
+                    Explore my practical cybersecurity projects,
+                    virtual SOC lab, and hands-on investigations
+                    to see how I apply my technical knowledge.
+                </p>
+
+                <a href="projects.html">
+                    Explore My Projects
+                    <i data-lucide="arrow-up-right"></i>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         FOOTER
+    ============================== -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <p>
+                &copy; <span id="currentYear"></span>
+                Tushar Mondal. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ==============================
+         EXISTING PORTFOLIO SCRIPTS
+    ============================== -->
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/animations.js"></script>
+
+    <!-- Certificate Page Functionality -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const grid = document.getElementById("certificatesGrid");
+            const cards = Array.from(
+                grid.querySelectorAll(".certificate-card")
+            );
+
+            const searchInput = document.getElementById("certificateSearch");
+            const filterButtons = document.querySelectorAll(".certificate-filter");
+
+            const emptyState = document.getElementById("certificatesEmpty");
+            const emptyTitle = document.getElementById("emptyStateTitle");
+            const emptyMessage = document.getElementById("emptyStateMessage");
+
+            const certificateCount = document.getElementById("certificateCount");
+            const totalCertificates = document.getElementById("totalCertificates");
+            const totalProviders = document.getElementById("totalProviders");
+            const totalCategories = document.getElementById("totalCategories");
+
+            let activeFilter = "all";
+
+            // Update statistics using actual certificate cards.
+
+            function updateStatistics() {
+
+                const providers = new Set();
+                const categories = new Set();
+
+                cards.forEach(function (card) {
+
+                    const issuer = card.querySelector(".certificate-issuer");
+
+                    if (issuer) {
+                        providers.add(issuer.textContent.trim());
+                    }
+
+                    const category = card.dataset.category;
+
+                    if (category) {
+                        categories.add(category);
+                    }
+
+                });
+
+                totalCertificates.textContent = cards.length;
+                totalProviders.textContent = providers.size;
+                totalCategories.textContent = categories.size;
+
+            }
+
+
+            // Search and category filtering.
+
+            function filterCertificates() {
+
+                const searchTerm = searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+                let visibleCount = 0;
+
+                cards.forEach(function (card) {
+
+                    const category = card.dataset.category || "";
+                    const searchData = (
+                        card.dataset.search || ""
+                    ).toLowerCase();
+
+                    const cardText = card.textContent.toLowerCase();
+
+                    const matchesCategory =
+                        activeFilter === "all" ||
+                        category === activeFilter;
+
+                    const matchesSearch =
+                        searchData.includes(searchTerm) ||
+                        cardText.includes(searchTerm);
+
+                    const shouldShow =
+                        matchesCategory && matchesSearch;
+
+                    card.hidden = !shouldShow;
+
+                    if (shouldShow) {
+                        visibleCount++;
+                    }
+
+                });
+
+                certificateCount.textContent = visibleCount;
+
+                emptyState.hidden = visibleCount !== 0;
+
+                if (cards.length === 0) {
+
+                    emptyTitle.textContent = "Certificates Coming Soon";
+
+                    emptyMessage.textContent =
+                        "I'm currently developing my skills through cybersecurity labs, hands-on projects, and professional training. My verified certificates will be displayed here as I earn them.";
+
+                } else if (visibleCount === 0) {
+
+                    emptyTitle.textContent = "No Certificates Found";
+
+                    emptyMessage.textContent =
+                        "No certificates match your search or selected category. Try another search term or select a different filter.";
+
+                }
+
+            }
+
+
+            // Category filter buttons.
+
+            filterButtons.forEach(function (button) {
+
+                button.addEventListener("click", function () {
+
+                    filterButtons.forEach(function (item) {
+                        item.classList.remove("active");
+                    });
+
+                    button.classList.add("active");
+
+                    activeFilter = button.dataset.filter;
+
+                    filterCertificates();
+
+                });
+
+            });
+
+
+            // Search input.
+
+            searchInput.addEventListener("input", filterCertificates);
+
+
+            // Initial setup.
+
+            updateStatistics();
+            filterCertificates();
+
+
+            // Initialize icons.
+
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+
+
+            // Footer year.
+
+            const yearElement = document.getElementById("currentYear");
+
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+
+        });
+    </script>
+
+</body>
+</html>
