@@ -490,6 +490,12 @@ select:focus-visible {
 
 }
 
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    display: block;
+}
 
 .logo-bracket {
 
